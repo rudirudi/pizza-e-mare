@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizza &amp; Mare – Take away</title>
+<meta name="description" content="Pizza &amp; Mare: pizze da 33 cm, fritti e sapori di mare da asporto. Guarda il menù e ordina.">
+<meta name="theme-color" content="#2a35b8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+body{margin:0}
+html{scroll-behavior:smooth}
+a{color:#2a35b8}a:hover{color:#16226b}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c93a17;outline-offset:3px}
+.menu-bg{overflow:hidden;background:radial-gradient(60% 22% at 0% 8%,rgba(127,200,230,.38),transparent 70%),radial-gradient(55% 20% at 100% 30%,rgba(42,53,184,.11),transparent 70%),radial-gradient(60% 22% at 5% 58%,rgba(26,163,181,.17),transparent 70%),radial-gradient(55% 20% at 98% 84%,rgba(127,200,230,.34),transparent 70%),#f2fafc}
+.slide.off,.slide.hid{opacity:0;visibility:hidden;pointer-events:none}
+.slide.off{animation:tideOut .65s ease-in both}
+.slide.on > .in,.slide.on > div > .in{animation:tideIn .85s cubic-bezier(.2,.8,.2,1) backwards}
+.slide.on > .in:nth-child(2),.slide.on > div > .in:nth-child(2){animation-delay:.12s}
+.slide.on > .in:nth-child(3),.slide.on > div > .in:nth-child(3){animation-delay:.24s}
+.slide.on > .in:nth-child(4),.slide.on > div > .in:nth-child(4){animation-delay:.36s}
+.slide.on > img{animation:chefIn 1s cubic-bezier(.2,.8,.2,1) .6s backwards}
+@keyframes tideOut{from{opacity:1;visibility:visible;translate:0 0;filter:blur(0)}to{opacity:0;visibility:hidden;translate:-70px 0;filter:blur(6px)}}
+@keyframes tideIn{from{opacity:0;translate:0 44px;filter:blur(5px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+@keyframes chefIn{from{opacity:0;translate:-50px 16px;scale:.9}to{opacity:1;translate:0 0;scale:1}}
+@media (prefers-reduced-motion: reduce){.slide,.slide *{animation:none!important}}
+button[value]{position:relative;transition:background-color .2s,border-color .2s,box-shadow .2s}
+button[value].sel{background:#c93a17 !important;color:#ffffff !important;border-color:#c93a17 !important;box-shadow:0 0 0 4px rgba(201,58,23,.22)}
+li button[value].sel{background:#fff0ea !important;color:#8a1f0c !important}
+li button[value].sel span{background:#c93a17 !important}
+button[value][data-qty]::after{content:attr(data-qty);position:absolute;top:-9px;right:-9px;min-width:24px;height:24px;padding:0 5px;box-sizing:border-box;border-radius:999px;background:#16226b;color:#ffffff;border:2px solid #ffffff;font:700 14px/20px 'Barlow',Arial,sans-serif;font-style:normal;text-align:center}
+div.picked{background:rgba(127,200,230,.24);box-shadow:0 0 0 10px rgba(127,200,230,.24);border-radius:6px}
+.hero{background-image:linear-gradient(90deg,rgba(234,247,251,.9) 0,rgba(234,247,251,.8) 520px,rgba(234,247,251,0) 1150px),url(assets/hero.avif);background-size:cover;background-position:right center;background-repeat:no-repeat}
+@media (max-width: 640px){
+header > div{padding-top:8px!important;padding-bottom:4px!important;gap:2px 12px!important}
+header svg[role="img"]{width:44px!important;height:44px!important}
+header a > span{font-size:25px!important}
+nav{flex-wrap:nowrap!important;width:100%;overflow-x:auto;gap:0 18px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;font-size:18px!important;padding:12px 2px!important}
+.hero{min-height:0!important;background-image:linear-gradient(180deg,rgba(234,247,251,.93) 0,rgba(234,247,251,.86) 52%,rgba(234,247,251,.1) 86%),url(assets/hero.avif);background-position:80% bottom}
+.hero > div{padding-top:36px!important;padding-bottom:270px!important}
+.hero h1{font-size:clamp(50px,16vw,72px)!important}
+.hero p{font-size:19px!important}
+.hero h2{font-size:clamp(34px,10vw,50px)!important}
+.hero img{width:170px!important}
+.hero a{flex:1 1 100%;justify-content:center;box-sizing:border-box}
+.hero div.in-up{width:100%}
+.wave{height:80px!important}
+.hero .wave{height:64px!important}
+#offerte > div{padding-top:20px!important;padding-bottom:48px!important}
+main{padding-top:60px!important;padding-bottom:56px!important;gap:34px!important}
+main > section{border-radius:16px!important;gap:16px!important;padding-bottom:22px!important}
+main > section > div:first-child{margin-top:-22px!important;gap:10px!important}
+h2.in-swing{font-size:22px!important;padding:5px 14px 7px!important}
+span.in-pop[aria-hidden="true"]{width:48px!important;height:48px!important}
+span.in-pop[aria-hidden="true"] svg{width:26px!important;height:26px!important}
+div.picked{box-shadow:0 0 0 6px rgba(127,200,230,.24)}
+.fab{left:12px!important;right:12px!important;bottom:12px!important;justify-content:center}
+[role="dialog"]{max-width:none!important}
+[role="dialog"] > div{padding-left:16px!important;padding-right:16px!important}
+[role="dialog"] h2{font-size:28px!important}
+footer{padding-bottom:96px!important}
+footer > div{gap:24px!important;padding-bottom:32px!important}
+}
+html.anim .in{opacity:0;transition:opacity .6s ease,translate .75s cubic-bezier(.2,.8,.2,1),scale .6s cubic-bezier(.3,1.5,.5,1),rotate .9s cubic-bezier(.2,.8,.2,1)}
+html.anim .in-up{translate:0 36px}
+html.anim .in-rise{translate:0 44px}
+html.anim .in-down{translate:0 -22px}
+html.anim .in-left{translate:-70px 0}
+html.anim .in-pop{scale:.55}
+html.anim .in-roll{translate:140px 0;rotate:200deg}
+html.anim .in-swing{translate:-46px 0;rotate:-12deg}
+html.anim .in.on{opacity:1;translate:0 0;scale:1;rotate:0deg}
+html.anim .wave path{transform-box:fill-box;transform-origin:center;animation:sway 7s ease-in-out infinite alternate}
+html.anim .wave path:nth-child(2){animation-duration:5s;animation-direction:alternate-reverse}
+html.anim .wave path:nth-child(3){animation-duration:9s}
+@keyframes sway{from{transform:scaleX(1.1) translateX(-3%)}to{transform:scaleX(1.1) translateX(3%)}}
+</style>
+</head>
+<body>
+<div style="overflow-x: clip; background: #f2fafc; color: #16226b; font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.5">
+
+<header style="background: #ffffff; border-bottom: 3px solid #9fd3ea">
+<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-top: 10px; padding-bottom: 10px">
+<a href="#top" class="in in-left" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg role="img" aria-label="Logo Pizza &amp; Mare" viewBox="0 0 120 120" style="width: 56px; height: 56px; flex: none">
+<circle cx="60" cy="60" r="57" fill="#ffffff" stroke="#7cc4e0" stroke-width="4"></circle>
+<path d="M6 60 q7 -6 14 0 t14 0 M86 60 q7 -6 14 0 t14 0 M10 70 q6 -5 12 0 t12 0 M86 70 q6 -5 12 0 t12 0" fill="none" stroke="#3f8fe0" stroke-width="3" stroke-linecap="round"></path>
+<circle cx="60" cy="60" r="31" fill="#e8a13a"></circle>
+<circle cx="60" cy="60" r="26" fill="#d8321e"></circle>
+<circle cx="47" cy="48" r="7" fill="#fff6e6"></circle><circle cx="74" cy="47" r="7" fill="#fff6e6"></circle><circle cx="45" cy="71" r="7" fill="#fff6e6"></circle><circle cx="75" cy="72" r="7" fill="#fff6e6"></circle>
+<ellipse cx="60" cy="40" rx="5" ry="3" fill="#3f9b4b"></ellipse><ellipse cx="60" cy="80" rx="5" ry="3" fill="#3f9b4b"></ellipse>
+<path d="M42 60 q15 -13 30 0 q-15 13 -30 0z M72 60 l10 -8 v16z" fill="#ffffff" stroke="#2a35b8" stroke-width="2.5" stroke-linejoin="round"></path>
+<circle cx="50" cy="58" r="1.8" fill="#2a35b8"></circle>
+</svg>
+<span style="font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-size: 30px; color: #2a35b8; letter-spacing: 0.02em">PIZZA <span style="color: #0e7f8f">&amp;</span> MARE</span>
+</a>
+<nav aria-label="Sezioni" style="display: flex; flex-wrap: wrap; gap: 4px 18px"><a href="#offerte" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Offerte</a><a href="#menu" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Menù</a><a href="#fritture" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Fritture</a><a href="#dolci" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Dolci</a><a href="#contatti" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Contatti</a></nav>
+</div>
+</header>
+
+<section id="top" class="hero" style="position: relative; overflow: hidden; background-color: #cdeaf3; min-height: clamp(520px, 46vw, 860px)">
+<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 56px; position: relative; z-index: 1; padding-top: 72px; padding-bottom: 170px">
+<div data-on-mouseenter="heroHold" data-on-mouseleave="heroGo" style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<div style="display: grid">
+<div class="slide {{s1cls}}" aria-hidden="{{s1hidden}}" style="grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+<div class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #0e7f8f">— Take away —</div>
+<h1 class="in in-left" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: clamp(56px, 9vw, 150px); line-height: 0.95; color: #2a35b8; text-shadow: 3px 3px 0 #ffffff, -3px 3px 0 #ffffff, 3px -3px 0 #ffffff, -3px -3px 0 #ffffff; text-wrap: balance">PIZZA <span style="color: #1aa3b5">&amp;</span> MARE</h1>
+<p class="in in-up" style="margin: 0; max-width: 34em; font-size: 22px; color: #16226b">Pizze da 33 cm, fritti e sapori di mare da portare via. Dal polpo con patate al carpaccio di spada, fino alla zuppa inglese alla ternana.</p>
+<div class="in in-up" style="display: flex; flex-wrap: wrap; gap: 14px">
+<a href="#menu" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; background: #2a35b8; color: #ffffff">Ordina online</a>
+<a href="#contatti" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; background: #ffffff; color: #2a35b8; border: 2px solid #2a35b8">Chiama</a>
+</div>
+</div>
+<div class="slide {{s2cls}}" aria-hidden="{{s2hidden}}" style="grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 20px 40px">
+<img src="assets/pizzaiolo.avif" alt="Il nostro pizzaiolo, a braccia conserte con il grembiule blu" width="576" height="760" style="flex: none; width: clamp(170px, 22vw, 340px); height: auto; max-width: 100%">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
+<div class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #0e7f8f">— Chi siamo —</div>
+<h2 class="in in-left" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: clamp(36px, 4.6vw, 76px); line-height: 1.02; color: #2a35b8; text-shadow: 3px 3px 0 #ffffff, -3px 3px 0 #ffffff, 3px -3px 0 #ffffff, -3px -3px 0 #ffffff; text-wrap: balance">Passione e mestiere dal 2009</h2>
+<p class="in in-up" style="margin: 0; max-width: 34em; font-size: 22px; color: #16226b">Dal 2009 il maestro pizzaiolo Antonio Ferri guida il nostro forno. Ogni impasto riposa 48 ore, viene steso a mano e cotto al momento, con ingredienti selezionati. Sarà un piacere accogliervi.</p>
+<div class="in in-up" style="display: flex; flex-wrap: wrap; gap: 14px 36px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #2a35b8">17 anni</span><span style="font-size: 16px; font-weight: 600; color: #16226b">di esperienza al forno</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #2a35b8">48 ore</span><span style="font-size: 16px; font-weight: 600; color: #16226b">di lievitazione</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #2a35b8">33 cm</span><span style="font-size: 16px; font-weight: 600; color: #16226b">la nostra pizza</span></div>
+</div>
+</div>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 2px">
+<button type="button" aria-label="Mostra la presentazione" aria-pressed="{{d1on}}" data-on-click="go1" style="display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 6px; border: 0; background: transparent; cursor: pointer"><span style="display: block; height: 10px; width: {{d1w}}; border-radius: 999px; background: {{d1bg}}; border: 2px solid #ffffff; transition: width 0.4s ease, background-color 0.4s ease"></span></button>
+<button type="button" aria-label="Mostra chi siamo" aria-pressed="{{d2on}}" data-on-click="go2" style="display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 6px; border: 0; background: transparent; cursor: pointer"><span style="display: block; height: 10px; width: {{d2w}}; border-radius: 999px; background: {{d2bg}}; border: 2px solid #ffffff; transition: width 0.4s ease, background-color 0.4s ease"></span></button>
+</div>
+</div>
+</div>
+<svg class="in in-rise wave" aria-hidden="true" viewBox="0 0 1440 180" preserveAspectRatio="none" style="display: block; width: 100%; height: 170px; position: absolute; left: 0; bottom: -1px; height: 110px">
+<defs><linearGradient id="wh0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd0ea" stop-opacity="0.0"></stop><stop offset="1" stop-color="#3f8fe0" stop-opacity="0.45"></stop></linearGradient><linearGradient id="wh1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f9fdc" stop-opacity="0.25"></stop><stop offset="1" stop-color="#2a4fc0" stop-opacity="0.75"></stop></linearGradient><linearGradient id="wh2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6fd0" stop-opacity="0.5"></stop><stop offset="1" stop-color="#1b2f9e" stop-opacity="1"></stop></linearGradient><linearGradient id="wh3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2440b0" stop-opacity="0.9"></stop><stop offset="1" stop-color="#1b2f9e" stop-opacity="1"></stop></linearGradient></defs>
+<path d="M0 70 C240 20 420 112 720 70 S1200 22 1440 62 V180 H0Z" fill="url(#wh0)"></path><path d="M0 100 C200 62 520 132 800 96 S1240 70 1440 106 V180 H0Z" fill="url(#wh1)"></path><path d="M0 130 C300 100 500 160 820 128 S1220 106 1440 136 V180 H0Z" fill="url(#wh2)"></path><path d="M0 158 C260 140 560 176 860 156 S1260 142 1440 160 V180 H0Z" fill="url(#wh3)"></path>
+</svg>
+</section>
+
+<section id="offerte" style="background: #1b2f9e; color: #ffffff">
+<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; padding-top: 32px; padding-bottom: 72px">
+<h2 class="in in-left" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: clamp(36px, 5vw, 54px); line-height: 1.05; color: #ffffff">Le nostre offerte</h2>
+<p class="in in-up" style="margin: 0; max-width: 38em; color: #d5e4ff">Combinazioni pensate per l’asporto, a prezzo ridotto.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #5a6fd0">
+<div style="min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #ffffff">Menù Margherita</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; color: #16226b; background: #ffd23f; border-radius: 999px; padding: 2px 12px; white-space: nowrap">Offerta · risparmi € 1,00</span></div><div style="font-size: 16px; line-height: 1.35; color: #d5e4ff">Pizza Margherita e una lattina da 33 cl a scelta.</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; color: #c7d3f5; text-decoration: line-through; text-decoration-thickness: 2px">€ 8,50</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; color: #ffd23f">€ 7,50</span></div><button type="button" value="Offerta Menù Margherita|7.50" data-on-click="add" aria-label="Aggiungi Offerta Menù Margherita al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #5a6fd0">
+<div style="min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #ffffff">Fritto e birra</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; color: #16226b; background: #ffd23f; border-radius: 999px; padding: 2px 12px; white-space: nowrap">Offerta · risparmi € 1,50</span></div><div style="font-size: 16px; line-height: 1.35; color: #d5e4ff">Fritto misto e una birra italiana da 33 cl.</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; color: #c7d3f5; text-decoration: line-through; text-decoration-thickness: 2px">€ 11,00</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; color: #ffd23f">€ 9,50</span></div><button type="button" value="Offerta Fritto e birra|9.50" data-on-click="add" aria-label="Aggiungi Offerta Fritto e birra al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #5a6fd0">
+<div style="min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #ffffff">Mare per due</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; color: #16226b; background: #ffd23f; border-radius: 999px; padding: 2px 12px; white-space: nowrap">Offerta · risparmi € 4,00</span></div><div style="font-size: 16px; line-height: 1.35; color: #d5e4ff">Due pizze di mare a scelta tra Polpo, Totonno e Ciringhito, più due filetti di baccalà.</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; color: #c7d3f5; text-decoration: line-through; text-decoration-thickness: 2px">€ 32,00</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; color: #ffd23f">€ 28,00</span></div><button type="button" value="Offerta Mare per due|28.00" data-on-click="add" aria-label="Aggiungi Offerta Mare per due al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #5a6fd0">
+<div style="min-width: 0"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #ffffff">Formato famiglia</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; color: #16226b; background: #ffd23f; border-radius: 999px; padding: 2px 12px; white-space: nowrap">Offerta · risparmi € 5,00</span></div><div style="font-size: 16px; line-height: 1.35; color: #d5e4ff">Quattro pizze rosse o bianche e una bibita da 1,5 L.</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 17px; color: #c7d3f5; text-decoration: line-through; text-decoration-thickness: 2px">€ 35,00</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; color: #ffd23f">€ 30,00</span></div><button type="button" value="Offerta Formato famiglia|30.00" data-on-click="add" aria-label="Aggiungi Offerta Formato famiglia al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="menu-bg">
+<main id="menu" style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-direction: column; gap: 44px; padding-top: 96px; padding-bottom: 80px">
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le pizze rosse</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7"></circle><path d="M12 6.5 l-3 -2 M12 6.5 l3 -2 M12 6.5 v-3.5"></path></svg></span>
+</div>
+<p class="in in-pop" style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; color: #2a35b8">€ 7,50 cad.</p><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px"><li class="in in-pop"><button type="button" value="Diavola|7.50" data-on-click="add" aria-label="Aggiungi Diavola al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Diavola<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Napoli|7.50" data-on-click="add" aria-label="Aggiungi Napoli al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Napoli<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Salsiccia|7.50" data-on-click="add" aria-label="Aggiungi Salsiccia al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Salsiccia<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="4 Stagioni|7.50" data-on-click="add" aria-label="Aggiungi 4 Stagioni al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">4 Stagioni<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Capricciosa|7.50" data-on-click="add" aria-label="Aggiungi Capricciosa al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Capricciosa<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Crudo|7.50" data-on-click="add" aria-label="Aggiungi Crudo al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Crudo<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Funghi|7.50" data-on-click="add" aria-label="Aggiungi Funghi al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Funghi<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Prosciutto cotto|7.50" data-on-click="add" aria-label="Aggiungi Prosciutto cotto al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Prosciutto cotto<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Tonno e cipolla|7.50" data-on-click="add" aria-label="Aggiungi Tonno e cipolla al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Tonno e cipolla<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Wurstel|7.50" data-on-click="add" aria-label="Aggiungi Wurstel al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Wurstel<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Speck|7.50" data-on-click="add" aria-label="Aggiungi Speck al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Speck<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Uovo e prosciutto cotto|7.50" data-on-click="add" aria-label="Aggiungi Uovo e prosciutto cotto al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Uovo e prosciutto cotto<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li></ul>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le pizze bianche</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 C5 9 12 4 20 4 C20 13 14 19 5 19z M5 19 L14 10"></path></svg></span>
+</div>
+<p class="in in-pop" style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; color: #2a35b8">€ 7,50 cad.</p><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px"><li class="in in-pop"><button type="button" value="Vegetariana|7.50" data-on-click="add" aria-label="Aggiungi Vegetariana al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Vegetariana<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Boscaiola|7.50" data-on-click="add" aria-label="Aggiungi Boscaiola al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Boscaiola<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Patate e salsiccia|7.50" data-on-click="add" aria-label="Aggiungi Patate e salsiccia al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Patate e salsiccia<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Verdura* e salsiccia|7.50" data-on-click="add" aria-label="Aggiungi Verdura* e salsiccia al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Verdura* e salsiccia<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="4 Formaggi|7.50" data-on-click="add" aria-label="Aggiungi 4 Formaggi al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">4 Formaggi<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li><li class="in in-pop"><button type="button" value="Tonno e zucchine|7.50" data-on-click="add" aria-label="Aggiungi Tonno e zucchine al carrello" style="display: inline-flex; align-items: center; gap: 10px; min-height: 46px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 21px; color: #16226b; background: #ffffff; border: 2px solid #9fd3ea; border-radius: 999px; padding: 4px 8px 4px 18px; cursor: pointer">Tonno e zucchine<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2a35b8; color: #ffffff"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 18px; height: 18px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></span></button></li></ul>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le pizze classiche</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"></circle><circle cx="12" cy="12" r="6.8"></circle><circle cx="10" cy="10" r="0.9"></circle><circle cx="14.5" cy="11.5" r="0.9"></circle><circle cx="11.5" cy="15" r="0.9"></circle></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Marinara</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, aglio, olio e origano</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 5,00</div><button type="button" value="Marinara|5.00" data-on-click="add" aria-label="Aggiungi Marinara al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Margherita</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Margherita|6.00" data-on-click="add" aria-label="Aggiungi Margherita al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Porcini e salsiccia</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">mozzarella, funghi porcini</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,50</div><button type="button" value="Porcini e salsiccia|8.50" data-on-click="add" aria-label="Aggiungi Porcini e salsiccia al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Fiori e alici</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">mozzarella, fiori di zucca, alici</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,50</div><button type="button" value="Fiori e alici|8.50" data-on-click="add" aria-label="Aggiungi Fiori e alici al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Bufala</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella, bufala e basilico</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,50</div><button type="button" value="Bufala|8.50" data-on-click="add" aria-label="Aggiungi Bufala al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">olio, sale e rosmarino</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,50</div><button type="button" value="Focaccia|4.50" data-on-click="add" aria-label="Aggiungi Focaccia al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia e cipolle</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">cipolle, origano e olio</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Focaccia e cipolle|6.00" data-on-click="add" aria-label="Aggiungi Focaccia e cipolle al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia patate</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">patate, rosmarino e olio</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Focaccia patate|6.00" data-on-click="add" aria-label="Aggiungi Focaccia patate al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia pomodorini</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodorini, origano, aglio e olio</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Focaccia pomodorini|6.00" data-on-click="add" aria-label="Aggiungi Focaccia pomodorini al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccione ripieno</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Focaccione ripieno|10.00" data-on-click="add" aria-label="Aggiungi Focaccione ripieno al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia Nutella</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 9,00</div><button type="button" value="Focaccia Nutella|9.00" data-on-click="add" aria-label="Aggiungi Focaccia Nutella al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Focaccia Nutella sottile</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,00</div><button type="button" value="Focaccia Nutella sottile|8.00" data-on-click="add" aria-label="Aggiungi Focaccia Nutella sottile al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Calzone “Tipico”</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">prosciutto cotto, mozzarella, pomodoro e funghi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,00</div><button type="button" value="Calzone “Tipico”|8.00" data-on-click="add" aria-label="Aggiungi Calzone “Tipico” al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Calzone “Sud”</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">mozzarella, salsiccia e friarielli</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,00</div><button type="button" value="Calzone “Sud”|8.00" data-on-click="add" aria-label="Aggiungi Calzone “Sud” al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le pizze fantasia</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5 Q12 2 21 6.5 L12 22 Z M5 9.5 Q12 6.5 19 9.5"></path><circle cx="11" cy="12" r="1"></circle><circle cx="13.5" cy="15.5" r="1"></circle></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Patate</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">patate, mozzarella, pancetta, rucola, pinoli e gorgonzola</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Patate|10.00" data-on-click="add" aria-label="Aggiungi Patate al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Zucchine</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">zucchine, mozzarella, bufala e salsa al tartufo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Zucchine|10.00" data-on-click="add" aria-label="Aggiungi Zucchine al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Melanzane</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella, melanzane, parmigiano, bufala e basilico</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Melanzane|10.00" data-on-click="add" aria-label="Aggiungi Melanzane al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Porchetta</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">porchetta, mozzarella, friarielli, bufala</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Porchetta|10.00" data-on-click="add" aria-label="Aggiungi Porchetta al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Nduja</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella, nduja, peperoni, olive nere, scamorza, salsiccia</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Nduja|10.00" data-on-click="add" aria-label="Aggiungi Nduja al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Radicchio</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">radicchio, mozzarella, speck, scamorza affumicata, mela e basilico</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Radicchio|10.00" data-on-click="add" aria-label="Aggiungi Radicchio al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Bresaola</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">bresaola, mozzarella, rucola, grana, pomodorini, noci, balsamico</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Bresaola|10.00" data-on-click="add" aria-label="Aggiungi Bresaola al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Poppea</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">salsa al tartufo, mozzarella, salame piccante, bufala, rucola, crudo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Poppea|10.00" data-on-click="add" aria-label="Aggiungi Poppea al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Cesare</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">tonno, cipolla, gorgonzola, rucola, peperoncino</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Cesare|10.00" data-on-click="add" aria-label="Aggiungi Cesare al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Nerone</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella, salsiccia, nduja, peperoni, salame piccante</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Nerone|10.00" data-on-click="add" aria-label="Aggiungi Nerone al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Francescana</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">pomodoro, mozzarella, funghi, salsiccia, crudo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Francescana|10.00" data-on-click="add" aria-label="Aggiungi Francescana al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le speciali</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 l2.6 5.6 6 .8 -4.4 4.2 1.1 6 -5.3 -3 -5.3 3 1.1 -6 -4.4 -4.2 6 -.8z"></path></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Nicola</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">nduja, crudo, gorgonzola e bufala</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Nicola|13.00" data-on-click="add" aria-label="Aggiungi Nicola al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Nonno</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">funghi, salsiccia, lardo e bufala</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Nonno|13.00" data-on-click="add" aria-label="Aggiungi Nonno al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Califfo</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">patate, guanciale, bufala e tartufo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Califfo|13.00" data-on-click="add" aria-label="Aggiungi Califfo al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Piediluco</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">tartufo, funghi, bufala, crudo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Piediluco|13.00" data-on-click="add" aria-label="Aggiungi Piediluco al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 id="mare" class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Dal mare</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 q6.5 -6.5 13 0 q-6.5 6.5 -13 0z M16 12 l5 -4 v8z"></path><circle cx="7.5" cy="11" r="0.8"></circle></svg></span>
+</div>
+<p class="in in-up" style="margin: 0; max-width: 40em; color: #3d4a78">Le nostre proposte di pesce. Puoi anche aggiungere pesce o frutti di mare* a qualsiasi pizza con € 4,00.</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Polpo</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">polpo, patate, rucola, pomodori secchi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Polpo|13.00" data-on-click="add" aria-label="Aggiungi Polpo al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Totonno</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">carpaccio di tonno, rucola, bufala e olive</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Totonno|13.00" data-on-click="add" aria-label="Aggiungi Totonno al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Ciringhito</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">carpaccio di spada, melanzane, scamorza affumicata, rucola e olive</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 13,00</div><button type="button" value="Ciringhito|13.00" data-on-click="add" aria-label="Aggiungi Ciringhito al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Fiori e alici</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">mozzarella, fiori di zucca, alici</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,50</div><button type="button" value="Fiori e alici|8.50" data-on-click="add" aria-label="Aggiungi Fiori e alici al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Cesare</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">tonno, cipolla, gorgonzola, rucola, peperoncino</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 10,00</div><button type="button" value="Cesare|10.00" data-on-click="add" aria-label="Aggiungi Cesare al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Filetto di baccalà</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">fritto, al pezzo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 3,00</div><button type="button" value="Filetto di baccalà|3.00" data-on-click="add" aria-label="Aggiungi Filetto di baccalà al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 id="fritture" class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le fritture*</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 h12 l-3 11 h-6z M8.5 10 V4.5 M11 10 V3 M13.5 10 V4 M16 10 V5.5"></path></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Supplì</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Supplì|1.50" data-on-click="add" aria-label="Aggiungi Supplì al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Arancini</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">cacio e pepe / amatriciana</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 2,50</div><button type="button" value="Arancini|2.50" data-on-click="add" aria-label="Aggiungi Arancini al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Fiori di zucca e alici</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">al pezzo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 2,50</div><button type="button" value="Fiori di zucca e alici|2.50" data-on-click="add" aria-label="Aggiungi Fiori di zucca e alici al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Filetto di baccalà</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">al pezzo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 3,00</div><button type="button" value="Filetto di baccalà|3.00" data-on-click="add" aria-label="Aggiungi Filetto di baccalà al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Patatine fritte</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Patatine fritte|4.00" data-on-click="add" aria-label="Aggiungi Patatine fritte al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Alga fritta</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">8 pezzi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Alga fritta|4.00" data-on-click="add" aria-label="Aggiungi Alga fritta al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Olive ascolane</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">6 pezzi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Olive ascolane|4.00" data-on-click="add" aria-label="Aggiungi Olive ascolane al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Mozzarelline</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">8 pezzi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Mozzarelline|4.00" data-on-click="add" aria-label="Aggiungi Mozzarelline al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Fritto misto</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">ascolana, mozzarellina, nugget pollo, mini supplì, crocchette di patate e melanzane, alga fritta e patatine</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 8,00</div><button type="button" value="Fritto misto|8.00" data-on-click="add" aria-label="Aggiungi Fritto misto al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Le bevande</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3 h10 l-1.5 18 h-7z M7.6 9.5 h8.8"></path></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Vino in bottiglia 0,75 L</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">a partire da</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 12,00</div></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Birre 33 cl italiane</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 3,00</div><button type="button" value="Birre 33 cl italiane|3.00" data-on-click="add" aria-label="Aggiungi Birre 33 cl italiane al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Birre 33 cl estere</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Birre 33 cl estere|4.00" data-on-click="add" aria-label="Aggiungi Birre 33 cl estere al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Birre 33 cl artigianali</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">a partire da</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 5,00</div></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Birre 66 cl</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,50</div><button type="button" value="Birre 66 cl|4.50" data-on-click="add" aria-label="Aggiungi Birre 66 cl al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Lattine 33 cl</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">coca, fanta, sprite, tè</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 2,50</div><button type="button" value="Lattine 33 cl|2.50" data-on-click="add" aria-label="Aggiungi Lattine 33 cl al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Bibite in bottiglia 1,5 L</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 5,00</div><button type="button" value="Bibite in bottiglia 1,5 L|5.00" data-on-click="add" aria-label="Aggiungi Bibite in bottiglia 1,5 L al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Acqua 1 L</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">naturale / frizzante</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 3,00</div><button type="button" value="Acqua 1 L|3.00" data-on-click="add" aria-label="Aggiungi Acqua 1 L al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Acqua 0,50 L</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">naturale / frizzante</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Acqua 0,50 L|1.50" data-on-click="add" aria-label="Aggiungi Acqua 0,50 L al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 id="dolci" class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Dolci</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12.5 h12 l-2 8.5 h-8z M6 12.5 a6 5.5 0 0 1 12 0"></path><circle cx="12" cy="4.6" r="1.6"></circle></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Crostata della nonna</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">con frutti di bosco</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Crostata della nonna|6.00" data-on-click="add" aria-label="Aggiungi Crostata della nonna al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Caprese al cacao</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">con crema alla vaniglia</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Caprese al cacao|6.00" data-on-click="add" aria-label="Aggiungi Caprese al cacao al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Babà fantasy</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">con panna, cioccolato fondente e confettura di fichi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Babà fantasy|6.00" data-on-click="add" aria-label="Aggiungi Babà fantasy al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Zuppa inglese alla ternana</div><div style="font-size: 16px; line-height: 1.35; color: #3d4a78">con liquore e scaglie di pampepato</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 6,00</div><button type="button" value="Zuppa inglese alla ternana|6.00" data-on-click="add" aria-label="Aggiungi Zuppa inglese alla ternana al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-pop" aria-hidden="true" style="align-self: center; width: 320px; max-width: 70%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(95,180,214,0), #5fb4d6, rgba(95,180,214,0))"></div>
+<section style="background: #ffffff; border: 2px solid #bfe0ee; border-radius: 20px; padding: 0 clamp(18px, 4vw, 40px) 30px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 10px 0 -4px #d9ecf4">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -26px">
+<h2 class="in in-swing" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 30px; letter-spacing: 0.03em; color: #ffffff; background: #c93a17; padding: 6px 20px 8px; border-radius: 4px; transform: rotate(-1.5deg)">Extra</h2>
+<span class="in in-pop" aria-hidden="true" style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ffffff; border: 2px solid #9fd3ea"><svg viewBox="0 0 24 24" style="width: 32px; height: 32px" fill="none" stroke="#0e7f8f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"></circle><path d="M12 7.5 v9 M7.5 12 h9"></path></svg></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 clamp(28px, 4vw, 64px)">
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Tonno e alici</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Tonno e alici|1.50" data-on-click="add" aria-label="Aggiungi Tonno e alici al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Pesce, frutti di mare*</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 4,00</div><button type="button" value="Pesce, frutti di mare*|4.00" data-on-click="add" aria-label="Aggiungi Pesce, frutti di mare* al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Formaggi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Formaggi|1.50" data-on-click="add" aria-label="Aggiungi Formaggi al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Salumi</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Salumi|1.50" data-on-click="add" aria-label="Aggiungi Salumi al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Burrata, bufala</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 3,00</div><button type="button" value="Burrata, bufala|3.00" data-on-click="add" aria-label="Aggiungi Burrata, bufala al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Ortaggi e verdura*</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,00</div><button type="button" value="Ortaggi e verdura*|1.00" data-on-click="add" aria-label="Aggiungi Ortaggi e verdura* al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Tartufo* estivo</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 5,00</div><button type="button" value="Tartufo* estivo|5.00" data-on-click="add" aria-label="Aggiungi Tartufo* estivo al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Mozzarella extra</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,00</div><button type="button" value="Mozzarella extra|1.00" data-on-click="add" aria-label="Aggiungi Mozzarella extra al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Base senza glutine</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 2,50</div><button type="button" value="Base senza glutine|2.50" data-on-click="add" aria-label="Aggiungi Base senza glutine al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+<div class="in in-up" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; text-transform: uppercase; color: #16226b">Mozzarella o latticini senza lattosio</div></div>
+<div style="flex: none; display: flex; align-items: center; gap: 12px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; white-space: nowrap; color: #2a35b8; font-variant-numeric: tabular-nums">€ 1,50</div><button type="button" value="Mozzarella o latticini senza lattosio|1.50" data-on-click="add" aria-label="Aggiungi Mozzarella o latticini senza lattosio al carrello" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #2a35b8; color: #ffffff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button></div>
+</div>
+</div>
+</section>
+<div class="in in-up" style="background: #ffffff; border: 2px solid #9fd3ea; border-radius: 12px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; font-size: 17px; color: #3d4a78">
+<p style="margin: 0">Pizza baby: € 1,50 in meno rispetto alla pizza da 33 cm.</p>
+<p style="margin: 0">Per la lista degli allergeni chiedi informazioni al banco.</p>
+<p style="margin: 0">* [SIGNIFICATO DELL’ASTERISCO, come sul menù in negozio]</p>
+</div>
+</main>
+<svg class="in in-rise wave" aria-hidden="true" viewBox="0 0 1440 180" preserveAspectRatio="none" style="display: block; width: 100%; height: 170px; margin-bottom: -1px">
+<defs><linearGradient id="wf0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd0ea" stop-opacity="0.0"></stop><stop offset="1" stop-color="#3f8fe0" stop-opacity="0.45"></stop></linearGradient><linearGradient id="wf1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f9fdc" stop-opacity="0.25"></stop><stop offset="1" stop-color="#2a4fc0" stop-opacity="0.75"></stop></linearGradient><linearGradient id="wf2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6fd0" stop-opacity="0.5"></stop><stop offset="1" stop-color="#101a5c" stop-opacity="1"></stop></linearGradient><linearGradient id="wf3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2a80" stop-opacity="0.9"></stop><stop offset="1" stop-color="#101a5c" stop-opacity="1"></stop></linearGradient></defs>
+<path d="M0 70 C240 20 420 112 720 70 S1200 22 1440 62 V180 H0Z" fill="url(#wf0)"></path><path d="M0 100 C200 62 520 132 800 96 S1240 70 1440 106 V180 H0Z" fill="url(#wf1)"></path><path d="M0 130 C300 100 500 160 820 128 S1220 106 1440 136 V180 H0Z" fill="url(#wf2)"></path><path d="M0 158 C260 140 560 176 860 156 S1260 142 1440 160 V180 H0Z" fill="url(#wf3)"></path>
+</svg>
+</div>
+
+<footer id="contatti" style="background: #101a5c; color: #ffffff; padding-bottom: 72px">
+<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-direction: column; gap: 32px; padding-top: 24px; padding-bottom: 56px">
+<h2 class="in in-left" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: clamp(36px, 5vw, 54px); color: #ffffff">Ordina e passa a ritirare</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 32px">
+<div class="in in-up" style="display: flex; flex-direction: column; gap: 6px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: #a9ecf5">Telefono</div><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px">[TELEFONO]</div></div>
+<div class="in in-up" style="display: flex; flex-direction: column; gap: 6px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: #a9ecf5">Dove siamo</div><div style="font-size: 20px">[INDIRIZZO, CITTÀ]</div></div>
+<div class="in in-up" style="display: flex; flex-direction: column; gap: 6px"><div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; color: #a9ecf5">Orari</div><div style="font-size: 20px">[GIORNI E ORARI DI APERTURA]</div><div style="font-size: 17px; color: #d5e4ff">[GIORNO DI CHIUSURA]</div></div>
+</div>
+<div class="in in-up" style="border-top: 1px solid #3a4aa8; padding-top: 20px; font-size: 16px; color: #d5e4ff">Pizza &amp; Mare · Take away · [P. IVA]</div>
+</div>
+</footer>
+
+<button type="button" class="fab" data-on-click="openCart" style="position: fixed; right: 20px; bottom: 20px; z-index: 50; display: inline-flex; align-items: center; gap: 12px; min-height: 58px; padding: 0 22px; border-radius: 999px; border: 3px solid #ffffff; background: #c93a17; color: #ffffff; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; cursor: pointer; box-shadow: 0 8px 24px rgba(16, 26, 92, 0.35)">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 26px; height: 26px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4 h3 l2.5 11 h10 l2 -8 H7"></path><circle cx="10" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>
+<span>Carrello</span>
+<span style="display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 30px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; background: #ffffff; color: #c93a17; font-variant-numeric: tabular-nums">{{count}}</span>
+<span style="font-variant-numeric: tabular-nums">{{total}}</span>
+</button>
+<sc-if value="{{open}}" hint-placeholder-val="{{false}}">
+<div style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 60; display: flex; justify-content: flex-end">
+<button type="button" aria-label="Chiudi il carrello" data-on-click="closeCart" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; border: 0; padding: 0; background: rgba(16, 26, 92, 0.6); cursor: pointer; touch-action: none"></button>
+<div role="dialog" aria-modal="true" aria-label="Il tuo ordine" style="position: relative; width: 100%; max-width: 480px; height: 100%; max-height: 100dvh; box-sizing: border-box; background: #f2fafc; display: flex; flex-direction: column; font-family: 'Barlow', Arial, sans-serif; color: #16226b">
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; background: #ffffff; border-bottom: 2px solid #bfe0ee">
+<h2 style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: 32px; color: #2a35b8">Il tuo ordine</h2>
+<button type="button" aria-label="Chiudi" data-on-click="closeCart" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 20px; height: 20px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6 l12 12 M18 6 l-12 12"></path></svg></button>
+</div>
+
+<div style="flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 18px 20px 24px; display: flex; flex-direction: column; gap: 18px">
+<sc-if value="{{isCart}}" hint-placeholder-val="{{true}}">
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; font-size: 19px; color: #3d4a78">Il carrello è vuoto. Aggiungi pizze e fritti dal menù con il tasto +.</p>
+</sc-if>
+<div style="flex: none; display: flex; flex-direction: column">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="2">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 44px 32px 44px; align-items: center; gap: 8px; padding: 12px 0; border-bottom: 1px dashed #b9d3ea">
+<div style="min-width: 0">
+<div style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.15; text-transform: uppercase; overflow-wrap: anywhere">{{it.name}}</div>
+<div style="font-size: 15px; color: #3d4a78; font-variant-numeric: tabular-nums">{{it.each}} l’uno · {{it.total}}</div>
+</div>
+<button type="button" aria-label="{{it.decLabel}}" data-on-click="it.dec" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 20px; height: 20px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12 h14"></path></svg></button>
+<span style="text-align: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; font-variant-numeric: tabular-nums">{{it.qty}}</span>
+<button type="button" aria-label="{{it.incLabel}}" data-on-click="it.inc" style="flex: none; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" viewBox="0 0 24 24" style="width: 22px; height: 22px" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5 v14 M5 12 h14"></path></svg></button>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{hasItems}}" hint-placeholder-val="{{true}}">
+<form id="ord-form" data-on-submit="submit" style="flex: none; display: flex; flex-direction: column; gap: 16px">
+<label for="ord-nome" style="display: flex; flex-direction: column; gap: 6px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; color: #16226b">Nome<input id="ord-nome" type="text" autocomplete="name" value="{{nome}}" data-on-change="setNome" style="font-family: 'Barlow', Arial, sans-serif; font-size: 18px; color: #16226b; padding: 12px 14px; border: 2px solid #9fd3ea; border-radius: 10px; background: #ffffff; box-sizing: border-box; width: 100%"></label>
+<label for="ord-tel" style="display: flex; flex-direction: column; gap: 6px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; color: #16226b">Telefono<input id="ord-tel" type="tel" inputmode="tel" autocomplete="tel" value="{{tel}}" data-on-change="setTel" style="font-family: 'Barlow', Arial, sans-serif; font-size: 18px; color: #16226b; padding: 12px 14px; border: 2px solid #9fd3ea; border-radius: 10px; background: #ffffff; box-sizing: border-box; width: 100%"></label>
+<label for="ord-ora" style="display: flex; flex-direction: column; gap: 6px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; color: #16226b">Orario di ritiro<input id="ord-ora" type="time" value="{{ora}}" data-on-change="setOra" style="font-family: 'Barlow', Arial, sans-serif; font-size: 18px; color: #16226b; padding: 12px 14px; border: 2px solid #9fd3ea; border-radius: 10px; background: #ffffff; box-sizing: border-box; width: 100%; min-height: 52px"></label>
+<label for="ord-note" style="display: flex; flex-direction: column; gap: 6px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; color: #16226b">Note (gusti, allergie)<textarea id="ord-note" rows="2" value="{{note}}" data-on-change="setNote" style="font-family: 'Barlow', Arial, sans-serif; font-size: 18px; color: #16226b; padding: 12px 14px; border: 2px solid #9fd3ea; border-radius: 10px; background: #ffffff; box-sizing: border-box; width: 100%; resize: none"></textarea></label>
+<fieldset style="margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="padding: 0; margin-bottom: 8px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase">Come vuoi pagare?</legend>
+<label for="pay-shop" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; background: #ffffff; border: 2px solid {{shopBorder}}; cursor: pointer">
+<input id="pay-shop" type="radio" name="pagamento" checked="{{payShop}}" data-on-change="setShop" style="flex: none; width: 22px; height: 22px; margin: 2px 0 0; accent-color: #2a35b8">
+<span><span style="display: block; font-weight: 600; font-size: 19px">Pago al ritiro in negozio</span><span style="display: block; font-size: 16px; color: #3d4a78">Ordini adesso, paghi quando passi a prendere.</span></span>
+</label>
+<label for="pay-online" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; background: #ffffff; border: 2px solid {{onlineBorder}}; cursor: pointer">
+<input id="pay-online" type="radio" name="pagamento" checked="{{payOnline}}" data-on-change="setOnline" style="flex: none; width: 22px; height: 22px; margin: 2px 0 0; accent-color: #2a35b8">
+<span><span style="display: block; font-weight: 600; font-size: 19px">Pago online con carta</span><span style="display: block; font-size: 16px; color: #3d4a78">Pagamento sicuro, ritiri senza passare in cassa.</span></span>
+</label>
+</fieldset>
+</form>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; padding: 12px 14px; border-radius: 10px; background: #fff4d6; color: #5c4300; font-size: 16px; font-weight: 600">Anteprima del sito: l’invio dell’ordine alla pizzeria e il pagamento con Stripe non sono ancora collegati. Nessun ordine è stato inviato.</p>
+<h3 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 28px; text-transform: uppercase">{{doneTitle}}</h3>
+<p style="margin: 0; font-size: 18px; color: #3d4a78">{{doneText}}</p>
+<div style="flex: none; background: #ffffff; border: 2px solid #bfe0ee; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+<div style="font-weight: 600; overflow-wrap: anywhere">{{nome}} · {{tel}}</div>
+<div style="color: #3d4a78">Ritiro: {{oraLabel}}</div>
+<sc-for list="{{items}}" as="it" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-variant-numeric: tabular-nums"><span>{{it.qty}} × {{it.name}}</span><span style="white-space: nowrap">{{it.total}}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+
+<div style="flex: none; display: flex; flex-direction: column; gap: 10px; padding: 12px 20px calc(14px + env(safe-area-inset-bottom, 0px)); background: #ffffff; border-top: 2px solid #bfe0ee; box-shadow: 0 -6px 16px rgba(16, 26, 92, 0.08)">
+<div style="display: flex; justify-content: space-between; align-items: baseline; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px">
+<span>Totale</span><span style="color: #2a35b8; font-variant-numeric: tabular-nums">{{total}}</span>
+</div>
+<sc-if value="{{hasError}}" hint-placeholder-val="{{false}}">
+<p role="alert" style="margin: 0; padding: 10px 12px; border-radius: 10px; background: #fdecea; color: #8a1f0c; font-weight: 600; font-size: 16px">{{error}}</p>
+</sc-if>
+<sc-if value="{{showSubmit}}" hint-placeholder-val="{{true}}">
+<button type="submit" form="ord-form" style="min-height: 56px; border-radius: 999px; border: 0; background: #2a35b8; color: #ffffff; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 24px; width: 100%">{{submitLabel}}</button>
+</sc-if>
+<sc-if value="{{showBack}}" hint-placeholder-val="{{false}}">
+<button type="button" data-on-click="closeCart" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; width: 100%">Torna al menù</button>
+</sc-if>
+<sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<button type="button" data-on-click="backToCart" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; padding: 0 10px; font-size: 18px">Modifica</button>
+<button type="button" data-on-click="newOrder" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; padding: 0 10px; font-size: 18px">Nuovo ordine</button>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+<script>
+(function () {
+var HOLE = /\{\{\s*([\w.$]+)\s*\}\}/g;
+function get(path, scope) {
+  if (path === 'true') return true; if (path === 'false') return false;
+  var v = scope, p = path.split('.');
+  for (var i = 0; i < p.length; i++) { if (v == null) return undefined; v = v[p[i]]; }
+  return v;
+}
+function collect(root, reg) {
+  var els = root.querySelectorAll ? Array.prototype.slice.call(root.querySelectorAll('*')) : [];
+  var skip = [];
+  els.forEach(function (el) {
+    for (var k = 0; k < skip.length; k++) if (skip[k] !== el && skip[k].contains(el)) return;
+    var tag = el.tagName.toLowerCase();
+    if (tag === 'sc-for') {
+      reg.push({ t: 'for', el: el, path: (el.getAttribute('list') || '').replace(/[{}\s]/g, ''), as: el.getAttribute('as') || 'item', tpl: el.innerHTML });
+      el.innerHTML = ''; el.style.display = 'contents'; skip.push(el); return;
+    }
+    if (tag === 'sc-if') {
+      reg.push({ t: 'if', el: el, path: (el.getAttribute('value') || '').replace(/[{}\s]/g, '') });
+      el.style.display = 'contents'; return;
+    }
+    Array.prototype.slice.call(el.attributes).forEach(function (a) {
+      if (a.name.indexOf('data-on-') === 0) { reg.push({ t: 'on', el: el, ev: a.name.slice(8), path: a.value }); return; }
+      if (a.value.indexOf('{{') < 0) return;
+      var whole = a.value.match(/^\s*\{\{\s*([\w.$]+)\s*\}\}\s*$/);
+      reg.push({ t: 'attr', el: el, name: a.name, tpl: a.value, whole: whole ? whole[1] : null, last: null });
+    });
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      if (n.nodeType === 3 && n.nodeValue.indexOf('{{') >= 0) reg.push({ t: 'text', node: n, tpl: n.nodeValue, last: null });
+    });
+  });
+}
+function apply(reg, scopeRef) {
+  reg.forEach(function (b) {
+    var scope = scopeRef.vals;
+    if (b.t === 'on') {
+      if (b.done) return; b.done = true;
+      var evs = b.ev === 'change' ? ['input', 'change'] : [b.ev];
+      evs.forEach(function (ev) {
+        b.el.addEventListener(ev, function (e) { var f = get(b.path, scopeRef.vals); if (typeof f === 'function') f(e); });
+      });
+    } else if (b.t === 'if') {
+      b.el.style.display = get(b.path, scope) ? 'contents' : 'none';
+    } else if (b.t === 'text') {
+      var s = b.tpl.replace(HOLE, function (_, p) { var v = get(p, scope); return v == null ? '' : v; });
+      if (s !== b.last) { b.node.nodeValue = s; b.last = s; }
+    } else if (b.t === 'attr') {
+      if (b.whole && (b.name === 'checked')) { b.el.checked = !!get(b.whole, scope); b.el.removeAttribute('checked'); return; }
+      if (b.whole && b.name === 'value') { var v = get(b.whole, scope); v = v == null ? '' : String(v); if (b.el.value !== v) b.el.value = v; return; }
+      var s2 = b.tpl.replace(HOLE, function (_, p) { var v = get(p, scope); return v == null ? '' : v; });
+      if (s2 !== b.last) { b.el.setAttribute(b.name, s2); b.last = s2; }
+    } else if (b.t === 'for') {
+      var list = get(b.path, scope) || [];
+      b.el.innerHTML = '';
+      list.forEach(function (item, idx) {
+        var tp = document.createElement('template'); tp.innerHTML = b.tpl;
+        var sub = [], sc = {}; for (var k in scope) sc[k] = scope[k]; sc[b.as] = item; sc.$index = idx;
+        collect(tp.content, sub); apply(sub, { vals: sc });
+        b.el.appendChild(tp.content);
+      });
+    }
+  });
+}
+function DCLogic() {}
+DCLogic.prototype.setState = function (o) {
+  var s = this.state || (this.state = {});
+  for (var k in o) s[k] = o[k];
+  this.__render();
+};
+DCLogic.prototype.forceUpdate = function () { this.__render(); };
+window.DCLogic = DCLogic;
+window.__mount = function (Component) {
+  var c = new Component(); c.props = {};
+  var reg = [], ref = { vals: {} }, mounted = false, busy = false, again = false;
+  collect(document.body, reg);
+  c.__render = function () {
+    if (busy) { again = true; return; }
+    busy = true;
+    ref.vals = c.renderVals(); apply(reg, ref);
+    busy = false;
+    if (mounted && c.componentDidUpdate) c.componentDidUpdate();
+    if (again) { again = false; c.__render(); }
+  };
+  c.__render(); mounted = true;
+  if (c.componentDidMount) c.componentDidMount();
+};
+})();
+</script>
+<script>
+class Component extends DCLogic {
+state = { cart: [], open: false, step: 'cart', pay: 'shop', nome: '', tel: '', ora: '', note: '', error: '', slide: 0 };
+startRot() {
+var self = this;
+clearInterval(this._rot);
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+this._rot = setInterval(function () {
+if (self._hold || (self.state && self.state.open)) return;
+self.setState({ slide: (((self.state && self.state.slide) || 0) + 1) % 2, moved: true });
+}, 4000);
+}
+componentDidMount() {
+this.startRot();
+if (typeof IntersectionObserver === 'undefined') return;
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+var seen = new WeakSet();
+var on = this._on = new IntersectionObserver(function (es) {
+es.forEach(function (e) {
+if (!e.isIntersecting || e.target.classList.contains('on')) return;
+var el = e.target, i = Array.prototype.indexOf.call(el.parentNode.children, el);
+el.style.transitionDelay = (Math.min(i, 9) * 70) + 'ms';
+el.classList.add('on');
+});
+}, { threshold: 0.05 });
+var off = this._off = new IntersectionObserver(function (es) {
+es.forEach(function (e) {
+if (e.isIntersecting) return;
+e.target.style.transitionDelay = '0ms';
+e.target.classList.remove('on');
+});
+}, { rootMargin: '90px 0px 90px 0px' });
+var scan = function () {
+document.querySelectorAll('.in').forEach(function (el) {
+if (seen.has(el)) return;
+seen.add(el); on.observe(el); off.observe(el);
+});
+};
+document.documentElement.classList.add('anim');
+scan();
+this._t = setTimeout(scan, 800);
+this._scan = scan;
+if (typeof MutationObserver !== 'undefined') {
+var q = 0;
+this._mo = new MutationObserver(function () { clearTimeout(q); q = setTimeout(scan, 60); });
+this._mo.observe(document.body, { childList: true, subtree: true });
+}
+}
+componentDidUpdate() {
+this.mark();
+var o = !!(this.state && this.state.open);
+if (o !== !!this._locked) {
+this._locked = o;
+document.documentElement.style.overflow = o ? 'hidden' : '';
+document.body.style.overflow = o ? 'hidden' : '';
+}
+if (this._scan) this._scan();
+}
+mark() {
+var q = {};
+((this.state && this.state.cart) || []).forEach(function (x) { q[x.name] = x.qty; });
+document.querySelectorAll('button[value]').forEach(function (b) {
+var n = String(b.value).split('|')[0], k = q[n] || 0;
+b.classList.toggle('sel', k > 0);
+if (k > 0) b.setAttribute('data-qty', k); else b.removeAttribute('data-qty');
+var r = b.closest('.in');
+if (r) r.classList.toggle('picked', k > 0);
+if (!b._lbl) b._lbl = b.getAttribute('aria-label') || '';
+b.setAttribute('aria-label', k > 0 ? b._lbl + ' (già nel carrello: ' + k + ')' : b._lbl);
+});
+}
+componentWillUnmount() {
+if (this._on) this._on.disconnect();
+if (this._off) this._off.disconnect();
+if (this._mo) this._mo.disconnect();
+clearTimeout(this._t);
+clearInterval(this._rot);
+document.documentElement.classList.remove('anim');
+document.documentElement.style.overflow = '';
+document.body.style.overflow = '';
+}
+renderVals() {
+var self = this, s = this.state || {}, cart = s.cart || [];
+var fmt = function (n) { return '\u20ac ' + n.toFixed(2).replace('.', ','); };
+var change = function (name, price, d) {
+var c = (self.state.cart || []).slice(), i = -1;
+for (var k = 0; k < c.length; k++) if (c[k].name === name) i = k;
+if (i < 0) { if (d > 0) c.push({ name: name, price: price, qty: d }); }
+else {
+var q = c[i].qty + d;
+if (q <= 0) c.splice(i, 1); else c[i] = { name: c[i].name, price: c[i].price, qty: q };
+}
+self.setState({ cart: c, step: 'cart', error: '' });
+};
+var sum = 0, count = 0;
+var items = cart.map(function (x) {
+sum += x.price * x.qty; count += x.qty;
+return { name: x.name, qty: x.qty, each: fmt(x.price), total: fmt(x.price * x.qty),
+incLabel: 'Aumenta ' + x.name, decLabel: 'Diminuisci ' + x.name,
+inc: function () { change(x.name, x.price, 1); }, dec: function () { change(x.name, x.price, -1); } };
+});
+var online = s.pay === 'online', total = fmt(sum);
+var field = function (k) { return function (e) { var o = {}; o[k] = e.target.value; self.setState(o); }; };
+var sl = s.slide || 0;
+var go = function (n) { return function () { if (((self.state && self.state.slide) || 0) !== n) self.setState({ slide: n, moved: true }); self.startRot(); }; };
+return {
+s1cls: sl === 0 ? (s.moved ? 'on' : '') : 'off',
+s2cls: sl === 1 ? 'on' : (s.moved ? 'off' : 'hid'),
+s1hidden: sl !== 0, s2hidden: sl !== 1,
+d1on: sl === 0, d2on: sl === 1,
+d1w: sl === 0 ? '34px' : '12px', d2w: sl === 1 ? '34px' : '12px',
+d1bg: sl === 0 ? '#2a35b8' : '#9fd3ea', d2bg: sl === 1 ? '#2a35b8' : '#9fd3ea',
+go1: go(0), go2: go(1),
+heroHold: function () { self._hold = true; }, heroGo: function () { self._hold = false; },
+add: function (e) {
+var v = String(e.currentTarget.value || '').split('|');
+var p = parseFloat(v[1]);
+if (v[0] && !isNaN(p)) change(v[0], p, 1);
+},
+items: items, count: count, total: total,
+open: !!s.open, isCart: s.step !== 'done', isDone: s.step === 'done',
+isEmpty: items.length === 0, hasItems: items.length > 0,
+showSubmit: s.step !== 'done' && items.length > 0, showBack: s.step !== 'done' && items.length === 0,
+openCart: function () { self.setState({ open: true }); },
+closeCart: function () { self.setState({ open: false }); },
+nome: s.nome || '', tel: s.tel || '', ora: s.ora || '', note: s.note || '',
+oraLabel: s.ora || 'appena pronto',
+setNome: field('nome'), setTel: field('tel'), setOra: field('ora'), setNote: field('note'),
+payShop: !online, payOnline: online,
+setShop: function () { self.setState({ pay: 'shop' }); },
+setOnline: function () { self.setState({ pay: 'online' }); },
+shopBorder: online ? '#bfe0ee' : '#2a35b8', onlineBorder: online ? '#2a35b8' : '#bfe0ee',
+error: s.error || '', hasError: !!s.error,
+submitLabel: (online ? 'Vai al pagamento' : 'Invia ordine') + ' \u00b7 ' + total,
+submit: function (e) {
+e.preventDefault();
+if (!String(self.state.nome || '').trim()) { self.setState({ error: 'Scrivi il tuo nome per il ritiro.' }); return; }
+if (String(self.state.tel || '').replace(/\D/g, '').length < 6) { self.setState({ error: 'Scrivi un numero di telefono valido: ci serve per avvisarti.' }); return; }
+self.setState({ step: 'done', error: '' });
+},
+doneTitle: online ? 'Pagamento online' : 'Paghi al ritiro',
+doneText: online ? 'A questo punto il cliente passa alla pagina sicura di Stripe e paga ' + total + ' con carta. Dopo il pagamento vede la conferma.' : 'A questo punto l\u2019ordine arriva alla pizzeria e il cliente vede la conferma: paga ' + total + ' in negozio al ritiro.',
+backToCart: function () { self.setState({ step: 'cart' }); },
+newOrder: function () { self.setState({ cart: [], step: 'cart', open: false, error: '' }); }
+};
+}
+}
+
+window.__mount(Component);
+</script>
+</body>
+</html>
