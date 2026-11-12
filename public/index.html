@@ -117,11 +117,11 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 </div>
 </div>
 <div class="slide {{s2cls}}" aria-hidden="{{s2hidden}}" style="grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 20px 40px">
-<img src="assets/pizzaiolo.avif" alt="Il nostro pizzaiolo, a braccia conserte con il grembiule blu" width="576" height="760" style="flex: none; width: clamp(170px, 22vw, 340px); height: auto; max-width: 100%">
+<img src="assets/pizzaiolo.avif" alt="Tommaso Tammaro, il nostro pizzaiolo, a braccia conserte con cappello e grembiule blu" width="400" height="530" style="flex: none; width: clamp(170px, 22vw, 340px); height: auto; max-width: 100%">
 <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 18px; align-items: flex-start">
 <div class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #0e7f8f">— Chi siamo —</div>
 <h2 class="in in-left" style="margin: 0; font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-weight: 400; font-size: clamp(36px, 4.6vw, 76px); line-height: 1.02; color: #2a35b8; text-shadow: 3px 3px 0 #ffffff, -3px 3px 0 #ffffff, 3px -3px 0 #ffffff, -3px -3px 0 #ffffff; text-wrap: balance">Passione e mestiere dal 2009</h2>
-<p class="in in-up" style="margin: 0; max-width: 34em; font-size: 22px; color: #16226b">Dal 2009 il maestro pizzaiolo Antonio Ferri guida il nostro forno. Ogni impasto riposa 48 ore, viene steso a mano e cotto al momento, con ingredienti selezionati. Sarà un piacere accogliervi.</p>
+<p class="in in-up" style="margin: 0; max-width: 34em; font-size: 22px; color: #16226b">Dal 2009 il maestro pizzaiolo Tommaso Tammaro guida il nostro forno. Ogni impasto riposa 48 ore, viene steso a mano e cotto al momento, con ingredienti selezionati. Sarà un piacere accogliervi.</p>
 <div class="in in-up" style="display: flex; flex-wrap: wrap; gap: 14px 36px">
 <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #2a35b8">17 anni</span><span style="font-size: 16px; font-weight: 600; color: #16226b">di esperienza al forno</span></div>
 <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: #2a35b8">48 ore</span><span style="font-size: 16px; font-weight: 600; color: #16226b">di lievitazione</span></div>
@@ -736,12 +736,16 @@ class Component extends DCLogic {
 state = { cart: [], open: false, step: 'cart', pay: 'shop', nome: '', tel: '', ora: '', note: '', error: '', slide: 0 };
 startRot() {
 var self = this;
-clearInterval(this._rot);
+clearTimeout(this._rot);
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-this._rot = setInterval(function () {
-if (self._hold || (self.state && self.state.open)) return;
-self.setState({ slide: (((self.state && self.state.slide) || 0) + 1) % 2, moved: true });
-}, 4000);
+var tick = function () {
+var cur = (self.state && self.state.slide) || 0;
+self._rot = setTimeout(function () {
+if (!(self._hold || (self.state && self.state.open))) self.setState({ slide: (((self.state && self.state.slide) || 0) + 1) % 2, moved: true });
+tick();
+}, cur === 0 ? 2800 : 4000);
+};
+tick();
 }
 componentDidMount() {
 this.startRot();
@@ -807,7 +811,7 @@ if (this._on) this._on.disconnect();
 if (this._off) this._off.disconnect();
 if (this._mo) this._mo.disconnect();
 clearTimeout(this._t);
-clearInterval(this._rot);
+clearTimeout(this._rot);
 document.documentElement.classList.remove('anim');
 document.documentElement.style.overflow = '';
 document.body.style.overflow = '';
