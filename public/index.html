@@ -27,7 +27,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 @keyframes tideIn{from{opacity:0;translate:0 44px;filter:blur(5px)}to{opacity:1;translate:0 0;filter:blur(0)}}
 @keyframes chefIn{from{opacity:0;translate:-50px 16px;scale:.9}to{opacity:1;translate:0 0;scale:1}}
 @media (prefers-reduced-motion: reduce){.slide,.slide *{animation:none!important}}
-.catbar{display:none}
+.topnav{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a:hover{border-bottom-color:#9fd3ea!important}
+.topnav a.act{border-bottom-color:#c93a17!important;color:#2a35b8!important}
+[id]{scroll-margin-top:calc(var(--hdr, 110px) + 18px)}
 .minus{display:none!important}
 .picked .minus{display:inline-flex!important}
 .oven{position:fixed;right:24px;bottom:92px;width:92px;height:84px;opacity:0;pointer-events:none;z-index:54;filter:drop-shadow(0 6px 10px rgba(16,26,92,.35))}
@@ -47,19 +51,15 @@ button[value][data-qty]::after{content:attr(data-qty);position:absolute;top:-9px
 div.picked{background:rgba(127,200,230,.24);box-shadow:0 0 0 10px rgba(127,200,230,.24);border-radius:6px}
 .hero{background-image:linear-gradient(90deg,rgba(234,247,251,.9) 0,rgba(234,247,251,.8) 520px,rgba(234,247,251,0) 1150px),url(assets/hero.avif);background-size:cover;background-position:right center;background-repeat:no-repeat}
 @media (max-width: 640px){
-header nav{display:none!important}
-.catbar{display:flex;position:sticky;top:0;z-index:40;gap:6px;overflow-x:auto;padding:8px 12px;background:#ffffff;border-bottom:3px solid #9fd3ea;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.catbar::-webkit-scrollbar{display:none}
-.catbar a{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;background:#eef7fb;color:#16226b;text-decoration:none;white-space:nowrap;font:700 17px/1 'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:.04em;text-transform:uppercase}
-[id]{scroll-margin-top:72px}
-header{border-bottom:0!important}
 main .in-up > div:first-child > div:first-child{font-size:19px!important;line-height:1.2!important}
 main .in-up > div:first-child > div + div{font-size:15px!important}
 #offerte .in-up span:first-child{font-size:20px!important}
 main li button[value]{font-size:19px!important}
-header > div{padding-top:8px!important;padding-bottom:4px!important;gap:2px 12px!important}
-header svg[role="img"]{width:44px!important;height:44px!important}
-header a > span{font-size:25px!important}
+header > div{padding-top:5px!important;gap:0 12px!important}
+header svg[role="img"]{width:36px!important;height:36px!important}
+header a > span{font-size:22px!important}
+.topnav{flex:1 1 100%!important;gap:0 18px!important}
+.topnav a{font-size:16px!important;padding:9px 2px 8px!important}
 .hero{min-height:0!important;background-image:linear-gradient(180deg,rgba(234,247,251,.93) 0,rgba(234,247,251,.86) 52%,rgba(234,247,251,.1) 86%),url(assets/hero.avif);background-position:80% bottom}
 .hero > div{padding-top:28px!important;padding-bottom:220px!important}
 .hero h1{font-size:clamp(50px,16vw,72px)!important}
@@ -104,8 +104,8 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <body>
 <div style="overflow-x: clip; background: #f2fafc; color: #16226b; font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; line-height: 1.5">
 
-<header style="background: #ffffff; border-bottom: 3px solid #9fd3ea">
-<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-top: 10px; padding-bottom: 10px">
+<header style="position: sticky; top: 0; z-index: 40; background: #ffffff; border-bottom: 3px solid #9fd3ea">
+<div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 24px; padding-top: 6px; padding-bottom: 0">
 <a href="#top" class="in in-left" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
 <svg role="img" aria-label="Logo Pizza &amp; Mare" viewBox="0 0 120 120" style="width: 56px; height: 56px; flex: none">
 <circle cx="60" cy="60" r="57" fill="#ffffff" stroke="#7cc4e0" stroke-width="4"></circle>
@@ -119,10 +119,9 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 </svg>
 <span style="font-family: 'Lilita One', 'Arial Black', sans-serif; font-style: italic; font-size: 30px; color: #2a35b8; letter-spacing: 0.02em">PIZZA <span style="color: #0e7f8f">&amp;</span> MARE</span>
 </a>
-<nav aria-label="Sezioni" style="display: flex; flex-wrap: wrap; gap: 4px 18px"><a href="#offerte" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Offerte</a><a href="#menu" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Menù</a><a href="#fritture" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Fritture</a><a href="#dolci" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Dolci</a><a href="#contatti" class="in in-down" style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: #16226b; padding: 12px 6px">Contatti</a></nav>
+<nav class="topnav" aria-label="Sezioni" style="flex: 0 1 auto; min-width: 0; max-width: 100%; display: flex; gap: 0 clamp(8px, 1vw, 22px); overflow-x: auto"><a href="#offerte" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Offerte</a><a href="#rosse" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Rosse</a><a href="#bianche" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Bianche</a><a href="#classiche" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Classiche</a><a href="#fantasia" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Fantasia</a><a href="#speciali" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Speciali</a><a href="#mare" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Dal mare</a><a href="#fritture" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Fritture</a><a href="#bevande" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Bevande</a><a href="#dolci" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Dolci</a><a href="#extra" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Extra</a><a href="#contatti" style="flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(15px, 1.05vw, 19px); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; color: #16226b; padding: 14px 3px 11px; border-bottom: 3px solid transparent">Contatti</a></nav>
 </div>
 </header>
-<nav class="catbar" aria-label="Categorie del menù"><a href="#offerte">Offerte</a><a href="#rosse">Rosse</a><a href="#bianche">Bianche</a><a href="#classiche">Classiche</a><a href="#fantasia">Fantasia</a><a href="#speciali">Speciali</a><a href="#mare">Dal mare</a><a href="#fritture">Fritture</a><a href="#bevande">Bevande</a><a href="#dolci">Dolci</a><a href="#extra">Extra</a><a href="#contatti">Contatti</a></nav>
 
 <section id="top" class="hero" style="position: relative; overflow: hidden; background-color: #cdeaf3; min-height: clamp(520px, 46vw, 860px)">
 <div style="max-width: 1840px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 96px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 56px; position: relative; z-index: 1; padding-top: 72px; padding-bottom: 170px">
@@ -777,8 +776,39 @@ tick();
 };
 tick();
 }
+spy() {
+var self = this, links = Array.prototype.slice.call(document.querySelectorAll('.topnav a'));
+if (!links.length) return;
+var secs = links.map(function (a) { return document.getElementById(String(a.getAttribute('href') || '').slice(1)); });
+var hdr = document.querySelector('header');
+var upd = function () {
+self._raf = 0;
+var hh = hdr ? hdr.offsetHeight : 0, off = hh + 30, cur = -1;
+if (hh !== self._hh) { self._hh = hh; document.documentElement.style.setProperty('--hdr', hh + 'px'); }
+for (var i = 0; i < secs.length; i++) if (secs[i] && secs[i].getBoundingClientRect().top <= off) cur = i;
+if (cur >= 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = links.length - 1;
+if (cur === self._cur) return;
+self._cur = cur;
+links.forEach(function (a, k) {
+a.classList.toggle('act', k === cur);
+if (k === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+});
+if (cur >= 0) {
+var a = links[cur], nav = a.parentNode;
+if (nav.scrollWidth > nav.clientWidth + 2) {
+var l = nav.scrollLeft + a.getBoundingClientRect().left - nav.getBoundingClientRect().left - (nav.clientWidth - a.offsetWidth) / 2;
+nav.scrollTo({ left: Math.max(0, l), behavior: 'smooth' });
+}
+}
+};
+this._onScroll = function () { if (!self._raf) self._raf = requestAnimationFrame(upd); };
+window.addEventListener('scroll', this._onScroll, { passive: true });
+window.addEventListener('resize', this._onScroll);
+upd();
+}
 componentDidMount() {
 this.startRot();
+this.spy();
 if (typeof IntersectionObserver === 'undefined') return;
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 var seen = new WeakSet();
@@ -855,6 +885,7 @@ if (this._off) this._off.disconnect();
 if (this._mo) this._mo.disconnect();
 clearTimeout(this._t);
 clearTimeout(this._rot);
+if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
 document.documentElement.classList.remove('anim');
 document.documentElement.style.overflow = '';
 document.body.style.overflow = '';
