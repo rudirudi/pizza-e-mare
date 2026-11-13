@@ -33,14 +33,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .footer-contact:hover{color:#a9ecf5}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .contact-fab{position:fixed;left:18px;bottom:18px;z-index:52}
-.contact-fab summary{list-style:none;width:52px;height:52px;box-sizing:border-box;border:3px solid #ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#2a35b8;color:#ffffff;cursor:pointer;box-shadow:0 8px 24px rgba(16,26,92,.32);transition:transform .2s ease,background-color .2s ease}
+.contact-fab summary{list-style:none;width:auto;min-width:52px;height:52px;padding:0 15px;box-sizing:border-box;border:3px solid #ffffff;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;background:#2a35b8;color:#ffffff;cursor:pointer;box-shadow:0 8px 24px rgba(16,26,92,.32);transition:transform .2s ease,background-color .2s ease}
 .contact-fab summary::-webkit-details-marker{display:none}
 .contact-fab summary:hover{transform:translateY(-2px);background:#16226b}
 .contact-fab summary svg{width:25px;height:25px}
+.contact-fab-caption{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
 .contact-fab .close-icon{display:none}
 .contact-fab .close-label{display:none}
 .contact-fab[open] .contact-icon{display:none}
 .contact-fab[open] .close-icon{display:block}
+.contact-fab[open] summary{width:52px;min-width:52px;padding:0}
+.contact-fab[open] .contact-fab-caption{display:none}
 .contact-fab[open] .open-label{display:none}
 .contact-fab[open] .close-label{display:inline}
 .contact-fab:not([open]) .contact-fab-menu{display:none}
@@ -119,7 +122,8 @@ span.in-pop[aria-hidden="true"] svg{width:26px!important;height:26px!important}
 div.picked{box-shadow:0 0 0 6px rgba(127,200,230,.24)}
 .fab{left:12px!important;right:12px!important;bottom:12px!important;justify-content:center}
 .contact-fab{left:12px;bottom:84px}
-.contact-fab summary{width:48px;height:48px}
+.contact-fab summary{width:auto;min-width:48px;height:48px;padding:0 13px}
+.contact-fab[open] summary{width:48px;min-width:48px}
 .oven{right:18px;bottom:82px;width:76px;height:70px}
 [role="dialog"]{max-width:none!important}
 [role="dialog"] > div{padding-left:16px!important;padding-right:16px!important}
@@ -614,7 +618,8 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 
 <details class="contact-fab">
 <summary><span class="sr-only"><span class="open-label">Apri i contatti rapidi</span><span class="close-label">Chiudi i contatti rapidi</span></span>
-<svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-5A8 8 0 1 1 21 15z"></path><path d="M8.5 9.5c.8 2.3 2.2 3.7 4.5 4.5"></path></svg>
+<svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+<span class="contact-fab-caption">Chiamaci</span>
 <svg class="close-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
 </summary>
 <div class="contact-fab-menu" role="group" aria-label="Contatti rapidi">
