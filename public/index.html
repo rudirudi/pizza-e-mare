@@ -14,14 +14,16 @@
 body{margin:0}
 html{scroll-behavior:smooth}
 a{color:#2a35b8}a:hover{color:#16226b}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c93a17;outline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #c93a17;outline-offset:3px}
 .menu-bg{overflow:hidden;background:radial-gradient(60% 22% at 0% 8%,rgba(127,200,230,.38),transparent 70%),radial-gradient(55% 20% at 100% 30%,rgba(42,53,184,.11),transparent 70%),radial-gradient(60% 22% at 5% 58%,rgba(26,163,181,.17),transparent 70%),radial-gradient(55% 20% at 98% 84%,rgba(127,200,230,.34),transparent 70%),#f2fafc}
 .menu-group{overflow:hidden;background:#ffffff;border:2px solid #bfe0ee;border-radius:20px;box-shadow:0 10px 0 -4px #d9ecf4}
 .menu-group-heading{display:flex;align-items:center;justify-content:space-between;gap:18px 48px;padding:24px clamp(18px,2.6vw,42px);background:#16226b;color:#ffffff}
 .menu-group-heading h2{margin:0;font-family:'Lilita One','Arial Black',sans-serif;font-style:italic;font-weight:400;font-size:clamp(38px,4.5vw,66px);line-height:1;text-transform:uppercase;letter-spacing:.03em}
 .menu-group-heading p{margin:0;max-width:34em;font-size:18px;color:#dcecff;text-align:right}
-.menu-subsection{background-image:linear-gradient(90deg,rgba(255,255,255,.46) 0%,rgba(255,255,255,.88) 18%,rgba(242,250,252,.91) 50%,rgba(255,255,255,.88) 82%,rgba(255,255,255,.46) 100%),var(--menu-section-bg)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;padding:32px clamp(14px,2.3vw,36px) 38px;display:flex;flex-direction:column;gap:20px}
-.menu-subsection+.menu-subsection{border-top:4px solid #bfe0ee}
+.menu-subsection{position:relative;background-image:linear-gradient(90deg,rgba(255,255,255,.46) 0%,rgba(255,255,255,.88) 18%,rgba(242,250,252,.91) 50%,rgba(255,255,255,.88) 82%,rgba(255,255,255,.46) 100%),var(--menu-section-bg)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;padding:32px clamp(14px,2.3vw,36px) 38px;display:flex;flex-direction:column;gap:20px}
+.menu-subsection+.menu-subsection{border-top:0;padding-top:54px}
+.menu-subsection+.menu-subsection::before{content:"";position:absolute;left:7%;right:7%;top:0;height:2px;background:linear-gradient(90deg,transparent,#9fd3ea 18%,#2a35b8 50%,#9fd3ea 82%,transparent);opacity:.82}
+.menu-subsection+.menu-subsection::after{content:"≈";position:absolute;left:50%;top:-16px;translate:-50% 0;width:48px;height:30px;display:flex;align-items:center;justify-content:center;border:2px solid #9fd3ea;border-radius:999px;background:#ffffff;color:#0e7f8f;font:700 28px/1 Georgia,serif;box-shadow:0 4px 10px rgba(16,26,92,.12)}
 .menu-subsection>div:first-child{margin-top:0!important}
 .contact-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;border-radius:999px;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:21px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;box-sizing:border-box}
 .contact-link svg{width:23px;height:23px;flex:none}
@@ -29,6 +31,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .contact-link.whatsapp{background:#25d366;color:#073b1b;border:2px solid #128c4a}
 .footer-contact{color:#ffffff;text-decoration:none}
 .footer-contact:hover{color:#a9ecf5}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.contact-fab{position:fixed;left:18px;bottom:18px;z-index:52}
+.contact-fab summary{list-style:none;width:52px;height:52px;box-sizing:border-box;border:3px solid #ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#2a35b8;color:#ffffff;cursor:pointer;box-shadow:0 8px 24px rgba(16,26,92,.32);transition:transform .2s ease,background-color .2s ease}
+.contact-fab summary::-webkit-details-marker{display:none}
+.contact-fab summary:hover{transform:translateY(-2px);background:#16226b}
+.contact-fab summary svg{width:25px;height:25px}
+.contact-fab .close-icon{display:none}
+.contact-fab .close-label{display:none}
+.contact-fab[open] .contact-icon{display:none}
+.contact-fab[open] .close-icon{display:block}
+.contact-fab[open] .open-label{display:none}
+.contact-fab[open] .close-label{display:inline}
+.contact-fab:not([open]) .contact-fab-menu{display:none}
+.contact-fab-menu{position:absolute;left:0;bottom:calc(100% + 10px);min-width:188px;box-sizing:border-box;padding:9px;display:flex;flex-direction:column;gap:8px;border:2px solid #bfe0ee;border-radius:18px;background:#ffffff;box-shadow:0 12px 32px rgba(16,26,92,.25);animation:contactPop .2s ease-out}
+.contact-fab .contact-link{min-height:42px;padding:0 14px;font-size:17px;white-space:nowrap}
+.contact-fab .contact-link svg{width:20px;height:20px}
+@keyframes contactPop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
 .slide.off,.slide.hid{opacity:0;visibility:hidden;pointer-events:none}
 .slide.off{animation:tideOut .65s ease-in both}
 .slide.on > .in,.slide.on > div > .in{animation:tideIn .85s cubic-bezier(.2,.8,.2,1) backwards}
@@ -69,7 +88,9 @@ div.picked{background:rgba(127,200,230,.24);box-shadow:0 0 0 10px rgba(127,200,2
 .menu-group-heading h2{font-size:38px}
 .menu-group-heading p{text-align:left;font-size:16px}
 .menu-subsection{background-image:linear-gradient(90deg,rgba(255,255,255,.57) 0%,rgba(255,255,255,.88) 24%,rgba(242,250,252,.9) 50%,rgba(255,255,255,.88) 76%,rgba(255,255,255,.57) 100%),var(--menu-section-bg)!important;background-position:center top!important;padding:24px 10px 30px}
-.menu-subsection+.menu-subsection{border-top-width:3px}
+.menu-subsection+.menu-subsection{padding-top:46px}
+.menu-subsection+.menu-subsection::before{left:12px;right:12px}
+.menu-subsection+.menu-subsection::after{top:-14px;width:44px;height:27px;font-size:25px}
 main .in-up > div:first-child > div:first-child{font-size:19px!important;line-height:1.2!important}
 main .in-up > div:first-child > div + div{font-size:15px!important}
 #offerte .in-up span:first-child{font-size:20px!important}
@@ -97,6 +118,8 @@ span.in-pop[aria-hidden="true"]{width:48px!important;height:48px!important}
 span.in-pop[aria-hidden="true"] svg{width:26px!important;height:26px!important}
 div.picked{box-shadow:0 0 0 6px rgba(127,200,230,.24)}
 .fab{left:12px!important;right:12px!important;bottom:12px!important;justify-content:center}
+.contact-fab{left:12px;bottom:84px}
+.contact-fab summary{width:48px;height:48px}
 .oven{right:18px;bottom:82px;width:76px;height:70px}
 [role="dialog"]{max-width:none!important}
 [role="dialog"] > div{padding-left:16px!important;padding-right:16px!important}
@@ -151,8 +174,6 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <p class="in in-up" style="margin: 0; max-width: 34em; font-size: 22px; color: #16226b">Pizze da 33 cm, fritti e sapori di mare da portare via. Dal polpo con patate al carpaccio di spada, fino alla zuppa inglese alla ternana.</p>
 <div class="in in-up" style="display: flex; flex-wrap: wrap; gap: 14px">
 <a href="#menu" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; border-radius: 999px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; background: #2a35b8; color: #ffffff">Ordina online</a>
-<a class="contact-link call" href="tel:+393271662911" aria-label="Chiama Pizza e Mare al 327 166 2911"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>Chiama</a>
-<a class="contact-link whatsapp" href="https://wa.me/393271662911?text=Ciao%20Pizza%20%26%20Mare%2C%20vorrei%20fare%20un%20ordine." target="_blank" rel="noopener" aria-label="Scrivi a Pizza e Mare su WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.8 9.8 0 0 0-8.5 14.7L2 22l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.3 7.3 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5.3-.4c.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6a9.7 9.7 0 0 0 3.8 3.4c.5.2.9.4 1.2.5.5.2 1 .2 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .2-1.1-.1-.1-.3-.2-.5-.3z"></path></svg>WhatsApp</a>
 </div>
 </div>
 <div class="slide {{s2cls}}" aria-hidden="{{s2hidden}}" style="grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 20px 40px">
@@ -590,6 +611,17 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <div class="in in-up" style="border-top: 1px solid #3a4aa8; padding-top: 20px; font-size: 16px; color: #d5e4ff">Pizza &amp; Mare · Take away · [P. IVA]</div>
 </div>
 </footer>
+
+<details class="contact-fab">
+<summary><span class="sr-only"><span class="open-label">Apri i contatti rapidi</span><span class="close-label">Chiudi i contatti rapidi</span></span>
+<svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-5A8 8 0 1 1 21 15z"></path><path d="M8.5 9.5c.8 2.3 2.2 3.7 4.5 4.5"></path></svg>
+<svg class="close-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</summary>
+<div class="contact-fab-menu" role="group" aria-label="Contatti rapidi">
+<a class="contact-link call" href="tel:+393271662911" aria-label="Chiama Pizza e Mare al 327 166 2911"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>Chiama</a>
+<a class="contact-link whatsapp" href="https://wa.me/393271662911?text=Ciao%20Pizza%20%26%20Mare%2C%20vorrei%20fare%20un%20ordine." target="_blank" rel="noopener" aria-label="Scrivi a Pizza e Mare su WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.8 9.8 0 0 0-8.5 14.7L2 22l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.3 7.3 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5.3-.4c.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6a9.7 9.7 0 0 0 3.8 3.4c.5.2.9.4 1.2.5.5.2 1 .2 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .2-1.1-.1-.1-.3-.2-.5-.3z"></path></svg>WhatsApp</a>
+</div>
+</details>
 
 <div class="oven" aria-hidden="true"><svg viewBox="0 0 92 84" style="display: block; width: 100%; height: 100%">
 <rect x="60" y="2" width="13" height="18" rx="2" fill="#8a2f12"></rect>
