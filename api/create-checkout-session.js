@@ -124,6 +124,7 @@ module.exports = async function createCheckoutSession(req, res) {
       mode: 'payment',
       locale: 'it',
       submit_type: 'pay',
+      'branding_settings[display_name]': 'Pizza & Mare',
       client_reference_id: orderId,
       success_url: `${origin}/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?checkout=cancelled`,
