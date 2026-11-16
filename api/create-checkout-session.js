@@ -33,6 +33,23 @@ function clean(value, max) {
   return String(value || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 }
 
+function productImagePath(name) {
+  if (/acqua|bibite|birr|lattine/i.test(name)) return 'bevande.jpg';
+  if (/babà|caprese|crostata|nutella|zuppa inglese/i.test(name)) return 'dolci.jpg';
+  if (/alga fritta|arancini|baccalà|fiori di zucca|fritto|mozzarelline|olive ascolane|patatine|supplì/i.test(name)) {
+    return 'fritture.jpg';
+  }
+  if (/califfo|ciringhito|mare|nicola|nonno|piediluco|polpo|totonno/i.test(name)) return 'mare.jpg';
+  if (/base senza glutine|burrata|formaggi$|mozzarella|ortaggi|pesce|salumi|tartufo|tonno e alici/i.test(name)) {
+    return 'extra.jpg';
+  }
+  return 'speciali.jpg';
+}
+
+function productImageUrl(name, origin) {
+  return `${origin}/assets/menu-backgrounds/${productImagePath(name)}`;
+}
+
 function parseBody(body) {
   if (Buffer.isBuffer(body)) return JSON.parse(body.toString('utf8'));
   if (typeof body === 'string') return JSON.parse(body);
@@ -110,6 +127,7 @@ module.exports = async function createCheckoutSession(req, res) {
       client_reference_id: orderId,
       success_url: `${origin}/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?checkout=cancelled`,
+      'custom_text[submit][message]': 'Ordine da asporto · ritiro in pizzeria. Pagamento protetto da Stripe.',
       'metadata[order_id]': orderId,
       'metadata[customer_name]': name,
       'metadata[phone]': phone,
@@ -125,6 +143,8 @@ module.exports = async function createCheckoutSession(req, res) {
       params.append(`line_items[${index}][price_data][currency]`, 'eur');
       params.append(`line_items[${index}][price_data][unit_amount]`, String(item.unitAmount));
       params.append(`line_items[${index}][price_data][product_data][name]`, item.name);
+      params.append(`line_items[${index}][price_data][product_data][description]`, 'Da asporto · ritiro in pizzeria');
+      params.append(`line_items[${index}][price_data][product_data][images][0]`, productImageUrl(item.name, origin));
     });
 
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
