@@ -684,7 +684,7 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 </label>
 <label for="pay-online" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 12px; background: #ffffff; border: 2px solid {{onlineBorder}}; cursor: pointer">
 <input id="pay-online" type="radio" name="pagamento" checked="{{payOnline}}" data-on-change="setOnline" style="flex: none; width: 22px; height: 22px; margin: 2px 0 0; accent-color: #2a35b8">
-<span><span style="display: block; font-weight: 600; font-size: 19px">Pago online con Stripe</span><span style="display: block; font-size: 16px; color: #3d4a78">Modalità test senza API: nessun addebito e nessun dato carta richiesto.</span></span>
+<span><span style="display: block; font-weight: 600; font-size: 19px">Pago online con Stripe</span><span style="display: block; font-size: 16px; color: #3d4a78">Pagamento sicuro in modalità test. Non verrà addebitato denaro reale.</span></span>
 </label>
 </fieldset>
 </form>
@@ -695,12 +695,12 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <div style="display:flex;flex-direction:column;gap:16px">
 <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
 <div style="font:700 30px/1 'Barlow Condensed','Arial Narrow',sans-serif;color:#635bff;letter-spacing:-.02em">stripe</div>
-<span style="padding:5px 10px;border-radius:999px;background:#efeefe;color:#4b45bd;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Modalità test</span>
+<span style="padding:5px 10px;border-radius:999px;background:#efeefe;color:#4b45bd;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Ambiente di test</span>
 </div>
-<div style="padding:14px 16px;border-radius:12px;background:#fff4d6;color:#5c4300;font-size:16px;font-weight:600">Demo senza API: non inserire dati di carte reali. Nessun pagamento verrà effettuato.</div>
+<div style="padding:14px 16px;border-radius:12px;background:#fff4d6;color:#5c4300;font-size:16px;font-weight:600">Stripe è collegato in modalità test: usa esclusivamente una carta di prova Stripe. Nessun addebito reale verrà effettuato.</div>
 <div>
 <h3 style="margin:0 0 5px;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:28px;text-transform:uppercase">Riepilogo pagamento</h3>
-<p style="margin:0;color:#3d4a78">Controlla l’ordine prima della conferma dimostrativa.</p>
+<p style="margin:0;color:#3d4a78">Controlla l’ordine prima di passare al Checkout protetto.</p>
 </div>
 <div style="background:#ffffff;border:2px solid #d9d6ff;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:9px">
 <div style="display:flex;justify-content:space-between;gap:12px;padding-bottom:8px;border-bottom:1px solid #e5e3f8;font-weight:600"><span>{{nome}}</span><span style="white-space:nowrap">Ritiro {{oraLabel}}</span></div>
@@ -710,9 +710,9 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 </div>
 <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border:2px solid #635bff;border-radius:12px;background:#ffffff">
 <svg aria-hidden="true" viewBox="0 0 24 24" style="width:30px;height:30px;flex:none" fill="none" stroke="#635bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"></rect><path d="M2.5 9h19M6.5 15h4"></path></svg>
-<span><span style="display:block;font-weight:700">Checkout Stripe dimostrativo</span><span style="display:block;font-size:15px;color:#3d4a78">La carta verrà richiesta solo dopo il collegamento delle API Stripe.</span></span>
+<span><span style="display:block;font-weight:700">Checkout Stripe sicuro</span><span style="display:block;font-size:15px;color:#3d4a78">I dati della carta vengono inseriti direttamente nella pagina ospitata da Stripe.</span></span>
 </div>
-<div style="display:flex;align-items:flex-start;gap:9px;color:#3d4a78;font-size:15px"><svg aria-hidden="true" viewBox="0 0 24 24" style="width:20px;height:20px;flex:none;color:#0e7f8f" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg><span>La versione definitiva userà Stripe Checkout ospitato: i dati di pagamento non passeranno dal sito della pizzeria.</span></div>
+<div style="display:flex;align-items:flex-start;gap:9px;color:#3d4a78;font-size:15px"><svg aria-hidden="true" viewBox="0 0 24 24" style="width:20px;height:20px;flex:none;color:#0e7f8f" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg><span>Prezzi e totale vengono ricontrollati dal server prima di creare il pagamento.</span></div>
 </div>
 </sc-if>
 
@@ -741,7 +741,7 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <button type="submit" form="ord-form" style="min-height: 56px; border-radius: 999px; border: 0; background: #2a35b8; color: #ffffff; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 24px; width: 100%">{{submitLabel}}</button>
 </sc-if>
 <sc-if value="{{showStripePay}}" hint-placeholder-val="{{false}}">
-<button type="button" data-on-click="confirmStripe" style="min-height:56px;border-radius:999px;border:0;background:#635bff;color:#ffffff;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:21px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 22px;width:100%">{{stripePayLabel}}</button>
+<button type="button" data-on-click="confirmStripe" aria-busy="{{stripeBusy}}" style="min-height:56px;border-radius:999px;border:0;background:#635bff;color:#ffffff;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:21px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 22px;width:100%">{{stripePayLabel}}</button>
 </sc-if>
 <sc-if value="{{showStripeBack}}" hint-placeholder-val="{{false}}">
 <button type="button" data-on-click="backToCart" style="min-height:48px;border-radius:999px;border:2px solid #635bff;background:#ffffff;color:#4b45bd;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:18px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 18px;width:100%">Torna ai dati dell’ordine</button>
@@ -750,8 +750,10 @@ html.anim .wave path:nth-child(3){animation-duration:9s}
 <button type="button" data-on-click="closeCart" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; width: 100%">Torna al menù</button>
 </sc-if>
 <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="display: grid; grid-template-columns: {{doneGrid}}; gap: 10px">
+<sc-if value="{{showModify}}" hint-placeholder-val="true">
 <button type="button" data-on-click="backToCart" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; padding: 0 10px; font-size: 18px">Modifica</button>
+</sc-if>
 <button type="button" data-on-click="newOrder" style="min-height: 52px; border-radius: 999px; border: 2px solid #2a35b8; background: #ffffff; color: #2a35b8; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0 22px; padding: 0 10px; font-size: 18px">Nuovo ordine</button>
 </div>
 </sc-if>
@@ -853,7 +855,7 @@ window.__mount = function (Component) {
 </script>
 <script>
 class Component extends DCLogic {
-state = { cart: [], open: false, step: 'cart', pay: 'shop', nome: '', tel: '', ora: '', note: '', error: '', slide: 0 };
+state = { cart: [], open: false, step: 'cart', pay: 'shop', nome: '', tel: '', ora: '', note: '', error: '', slide: 0, loading: false, paid: false, paidAmount: 0, orderId: '' };
 startRot() {
 var self = this;
 clearTimeout(this._rot);
@@ -866,6 +868,40 @@ tick();
 }, cur === 0 ? 2800 : 4000);
 };
 tick();
+}
+checkoutDraft() {
+return { cart: this.state.cart || [], nome: this.state.nome || '', tel: this.state.tel || '', ora: this.state.ora || '', note: this.state.note || '', pay: 'online' };
+}
+readCheckoutDraft() {
+try {
+var draft = JSON.parse(sessionStorage.getItem('pizzaMareCheckout') || 'null');
+if (!draft || !Array.isArray(draft.cart)) return null;
+return draft;
+} catch (_) { return null; }
+}
+clearCheckoutQuery() {
+if (window.history && window.history.replaceState) window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+}
+handleCheckoutReturn() {
+var self = this, params = new URLSearchParams(window.location.search), result = params.get('checkout');
+if (!result) return;
+var draft = this.readCheckoutDraft() || {};
+if (result === 'cancelled') {
+this.setState({ cart: draft.cart || [], nome: draft.nome || '', tel: draft.tel || '', ora: draft.ora || '', note: draft.note || '', pay: 'online', open: true, step: 'stripe', loading: false, paid: false, error: 'Pagamento annullato. L’ordine è ancora disponibile e puoi riprovare.' });
+this.clearCheckoutQuery();
+return;
+}
+var sessionId = params.get('session_id') || '';
+if (result !== 'success' || !sessionId) { this.clearCheckoutQuery(); return; }
+this.setState({ cart: draft.cart || [], nome: draft.nome || '', tel: draft.tel || '', ora: draft.ora || '', note: draft.note || '', pay: 'online', open: true, step: 'stripe', loading: true, paid: false, error: '' });
+fetch('/api/verify-checkout-session?session_id=' + encodeURIComponent(sessionId), { headers: { Accept: 'application/json' } })
+.then(function (response) { return response.json().then(function (data) { if (!response.ok) throw new Error(data.error || 'Pagamento non verificato.'); return data; }); })
+.then(function (data) {
+sessionStorage.removeItem('pizzaMareCheckout');
+self.setState({ step: 'done', loading: false, paid: true, paidAmount: Number(data.amountTotal || 0), orderId: data.orderId || '', nome: self.state.nome || data.customerName || '', ora: self.state.ora || data.pickupTime || '', error: '' });
+self.clearCheckoutQuery();
+})
+.catch(function (error) { self.setState({ step: 'stripe', loading: false, paid: false, error: error.message || 'Non è stato possibile verificare il pagamento.' }); self.clearCheckoutQuery(); });
 }
 spy() {
 var self = this, links = Array.prototype.slice.call(document.querySelectorAll('.topnav a'));
@@ -900,6 +936,7 @@ upd();
 componentDidMount() {
 this.startRot();
 this.spy();
+this.handleCheckoutReturn();
 if (typeof IntersectionObserver === 'undefined') return;
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 var seen = new WeakSet();
@@ -1001,7 +1038,7 @@ return { name: x.name, qty: x.qty, each: fmt(x.price), total: fmt(x.price * x.qt
 incLabel: 'Aumenta ' + x.name, decLabel: 'Diminuisci ' + x.name,
 inc: function () { change(x.name, x.price, 1); }, dec: function () { change(x.name, x.price, -1); } };
 });
-var online = s.pay === 'online', total = fmt(sum);
+var online = s.pay === 'online', total = fmt(s.paid && s.paidAmount ? s.paidAmount / 100 : sum);
 var field = function (k) { return function (e) { var o = {}; o[k] = e.target.value; self.setState(o); }; };
 var sl = s.slide || 0;
 var go = function (n) { return function () { if (((self.state && self.state.slide) || 0) !== n) self.setState({ slide: n, moved: true }); self.startRot(); }; };
@@ -1039,19 +1076,41 @@ setOnline: function () { self.setState({ pay: 'online' }); },
 shopBorder: online ? '#bfe0ee' : '#2a35b8', onlineBorder: online ? '#2a35b8' : '#bfe0ee',
 error: s.error || '', hasError: !!s.error,
 submitLabel: (online ? 'Continua con Stripe' : 'Invia ordine') + ' \u00b7 ' + total,
-stripePayLabel: 'Conferma demo Stripe \u00b7 ' + total,
+stripePayLabel: s.loading ? 'Apertura di Stripe…' : 'Vai al pagamento \u00b7 ' + total,
+stripeBusy: s.loading ? 'true' : 'false',
 submit: function (e) {
 e.preventDefault();
 if (!String(self.state.nome || '').trim()) { self.setState({ error: 'Scrivi il tuo nome per il ritiro.' }); return; }
 if (String(self.state.tel || '').replace(/\D/g, '').length < 6) { self.setState({ error: 'Scrivi un numero di telefono valido: ci serve per avvisarti.' }); return; }
 self.setState({ step: online ? 'stripe' : 'done', error: '' });
 },
-confirmStripe: function () { self.setState({ step: 'done', error: '' }); },
-doneNotice: online ? 'Simulazione Stripe completata: nessun pagamento reale è stato eseguito e nessun ordine è stato inviato.' : 'Anteprima del sito: l\u2019invio dell\u2019ordine alla pizzeria non è ancora collegato. Nessun ordine è stato inviato.',
-doneTitle: online ? 'Demo Stripe completata' : 'Paghi al ritiro',
-doneText: online ? 'Il flusso dimostrativo ha confermato ' + total + '. Quando saranno disponibili le API, qui verrà verificato il pagamento reale prima di inviare l\u2019ordine.' : 'A questo punto l\u2019ordine arriva alla pizzeria e il cliente vede la conferma: paga ' + total + ' in negozio al ritiro.',
+confirmStripe: function () {
+if (self.state.loading) return;
+var draft = self.checkoutDraft();
+try { sessionStorage.setItem('pizzaMareCheckout', JSON.stringify(draft)); } catch (_) {}
+self.setState({ loading: true, error: '' });
+fetch('/api/create-checkout-session', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+body: JSON.stringify({
+name: self.state.nome,
+phone: self.state.tel,
+pickupTime: self.state.ora,
+notes: self.state.note,
+items: (self.state.cart || []).map(function (item) { return { name: item.name, qty: item.qty }; })
+})
+})
+.then(function (response) { return response.json().then(function (data) { if (!response.ok) throw new Error(data.error || 'Pagamento non disponibile.'); return data; }); })
+.then(function (data) { if (!data.url || data.url.indexOf('https://checkout.stripe.com/') !== 0) throw new Error('Risposta di pagamento non valida.'); window.location.assign(data.url); })
+.catch(function (error) { self.setState({ loading: false, error: error.message || 'Non è stato possibile aprire Stripe. Riprova.' }); });
+},
+doneNotice: online && s.paid ? 'Pagamento di prova confermato da Stripe. Nessun denaro reale è stato addebitato.' : 'Anteprima del sito: l\u2019invio dell\u2019ordine alla pizzeria non è ancora collegato. Nessun ordine è stato inviato.',
+doneTitle: online && s.paid ? 'Pagamento test riuscito' : 'Paghi al ritiro',
+doneText: online && s.paid ? 'Stripe ha verificato il pagamento di ' + total + '. L’ordine test non viene inoltrato alla pizzeria.' : 'Il riepilogo è pronto: pagherai ' + total + ' in negozio al ritiro.',
+showModify: !(online && s.paid),
+doneGrid: online && s.paid ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))',
 backToCart: function () { self.setState({ step: 'cart' }); },
-newOrder: function () { self.setState({ cart: [], step: 'cart', open: false, error: '' }); }
+newOrder: function () { try { sessionStorage.removeItem('pizzaMareCheckout'); } catch (_) {} self.setState({ cart: [], step: 'cart', open: false, error: '', loading: false, paid: false, paidAmount: 0, orderId: '' }); }
 };
 }
 }
