@@ -30,7 +30,7 @@ for (const [name, product] of Object.entries(catalog)) {
   }
 }
 
-for (const required of ['Via Antonelli 2B', '05100 Terni (TR)', '327 166 2911']) {
+for (const required of ['Via Antonelli 2B', '05100 Terni (TR)', '352 22 70 825']) {
   if (!html.includes(required)) errors.push(`Informazione mancante nel sito: ${required}`);
 }
 
