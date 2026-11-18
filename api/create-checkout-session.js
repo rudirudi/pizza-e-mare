@@ -36,11 +36,14 @@ function clean(value, max) {
 function productImagePath(name) {
   if (/acqua|bibite|birr|lattine/i.test(name)) return 'bevande.jpg';
   if (/babà|caprese|crostata|nutella|zuppa inglese/i.test(name)) return 'dolci.jpg';
+  if (/risotto|rigatoni|gnocchetti|ciriole|pennette|pasta mista|frittura mista|moscardini|seppie|insalata terra e mare|hamburger di|pizza box/i.test(name)) {
+    return 'mare.jpg';
+  }
   if (/alga fritta|arancini|baccalà|fiori di zucca|fritto|mozzarelline|olive ascolane|patatine|supplì/i.test(name)) {
     return 'fritture.jpg';
   }
   if (/califfo|ciringhito|mare|nicola|nonno|piediluco|polpo|totonno/i.test(name)) return 'mare.jpg';
-  if (/base senza glutine|burrata|formaggi$|mozzarella|ortaggi|pesce|salumi|tartufo|tonno e alici/i.test(name)) {
+  if (/awase|barbecue|base senza glutine|burrata|formaggi$|ketchup|maionese|mozzarella|ortaggi|pesce|salsa|salumi|tartufo|tonno e alici/i.test(name)) {
     return 'extra.jpg';
   }
   return 'speciali.jpg';
